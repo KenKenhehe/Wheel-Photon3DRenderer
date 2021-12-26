@@ -25,7 +25,7 @@ void VertexArray::Bind()
 
 void VertexArray::Unbind()
 {
-	//Bind vao and vbo to 0 so that we don't accendentally modify the vao and vbo
+	//Bind m_vao and vbo to 0 so that we don't accendentally modify the m_vao and vbo
 	glBindVertexArray(0);
 }
 

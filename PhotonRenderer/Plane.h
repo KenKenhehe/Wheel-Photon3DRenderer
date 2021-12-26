@@ -1,4 +1,3 @@
-#pragma once
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
@@ -19,7 +18,7 @@ public:
 private:
 	int m_width;
 	int m_height;
-
-
+	/*float* m_vertices;
+	Shader shader;*/
 };
 

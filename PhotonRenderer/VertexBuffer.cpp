@@ -1,13 +1,13 @@
 #include "VertexBuffer.h"
 
-VertexBuffer::VertexBuffer(GLfloat* vertices, GLsizeiptr size)
+VertexBuffer::VertexBuffer(GLfloat* m_vertices, GLsizeiptr size)
 {
 
 	glGenBuffers(1, &ID);
 	//Bind(Select) the generated vertex buffer and specify this is a GL_ARRAY_BUFFER
 	glBindBuffer(GL_ARRAY_BUFFER, ID);
 	//Use the vertext data for the VBO
-	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size, m_vertices, GL_STATIC_DRAW);
 }
 
 
