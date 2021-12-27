@@ -8,35 +8,48 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
+#include <vector>
 class Cube
 {
 public:
 	Cube();
-	Cube(int width, int height, int depth, glm::vec3 position);
-	Cube(int width, int height, int depth, glm::vec3 position, Shader& shader);
-	Cube(int width, int height, int depth, float posistion_x, float position_y, float position_z);
-	Cube(int width, int height, int depth, float posistion_x, float position_y, float position_z, Shader& shader);
+	Cube(float scale, glm::vec3 position);
+	Cube(float scale, float posistion_x, float position_y, float position_z);
+	Cube(float scale, float posistion_x, float position_y, float position_z, Shader& shader);
+	Cube(float width, float height, float depth, glm::vec3 position);
+	Cube(float width, float height, float depth, glm::vec3 position, Shader& shader);
+	Cube(float width, float height, float depth, float posistion_x, float position_y, float position_z);
+	Cube(float width, float height, float depth, float posistion_x, float position_y, float position_z, Shader& shader);
 
 public:
 	void Draw(Camera& camera);
 	void Dispose();
 
 private:
+	void Init();
+private:
 	glm::vec3 m_position;
 	glm::vec3 m_scale;
+	glm::mat4 m_model;
 	Shader m_basic_shader;
 	VertexArray m_vao;
+	
+	std::vector<GLfloat> m_vertices_list;
+	std::vector<GLuint> m_indices_list;
+
+	GLfloat* m_vertices_ptr = nullptr;
+	GLuint* m_indices_ptr = nullptr;
 
 	GLfloat m_vertices[24] =
 	{ //     COORDINATES     //
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f,  0.5f
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f,  1.0f
 	};
 
 	GLuint m_indices[36] =

@@ -180,7 +180,7 @@ int main()
 	//-------------------Original------------------
 
 	Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, 2.0f));
-	Cube cube;
+	Cube cube(0.3f, glm::vec3(.8f, 0.0f, 0.0f));
 
 	float rotation = 0;
 	double previous_time = glfwGetTime();
