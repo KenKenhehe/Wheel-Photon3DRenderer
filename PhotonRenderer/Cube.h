@@ -4,6 +4,8 @@
 #include "VertexArray.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Vertex.h"
+
 #include <stb\stb_image.h> 
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
@@ -20,21 +22,30 @@ public:
 	Cube(float width, float height, float depth, glm::vec3 position, Shader& shader);
 	Cube(float width, float height, float depth, float posistion_x, float position_y, float position_z);
 	Cube(float width, float height, float depth, float posistion_x, float position_y, float position_z, Shader& shader);
-
+	Cube(glm::vec3 scale, glm::vec3 position);
+	Cube(glm::vec3 scale, glm::vec3 position, Shader& shader);
+	Cube(glm::vec3 scale, float posistion_x, float position_y, float position_z);
 public:
-	void Draw(Camera& camera);
+	void Draw(Camera* camera = nullptr);
 	void Dispose();
-
+	void LoadTexture(const std::string& file_path);
 private:
 	void Init();
+	
 private:
+	std::vector<Vertex> m_vertices_list;
+
 	glm::vec3 m_position;
 	glm::vec3 m_scale;
 	glm::mat4 m_model;
 	Shader m_basic_shader;
 	VertexArray m_vao;
-	
-	std::vector<GLfloat> m_vertices_list;
+
+	VertexBuffer* m_vbo;
+	IndexBuffer* m_ibo;
+
+	Texture* m_texure;
+	std::vector<GLfloat> m_vertex_data_list;
 	std::vector<GLuint> m_indices_list;
 
 	GLfloat* m_vertices_ptr = nullptr;

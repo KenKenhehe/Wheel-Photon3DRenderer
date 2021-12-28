@@ -180,7 +180,10 @@ int main()
 	//-------------------Original------------------
 
 	Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, 2.0f));
-	Cube cube(0.3f, glm::vec3(.8f, 0.0f, 0.0f));
+	Cube cube(glm::vec3(.5f, 0.5f, 0.5f), glm::vec3(0.0f, 0.0f, 0.0f));
+	cube.LoadTexture("resources/brick.png");
+	Cube cube2(0.1f, 0.1f, 0.1f, glm::vec3(.5f, 0.2f, 0.0f));
+	//Cube cube3(0.5f, 0.5f, 0.5f, glm::vec3(.3f, 0.6f, 0.0f));
 
 	float rotation = 0;
 	double previous_time = glfwGetTime();
@@ -193,7 +196,6 @@ int main()
 		glClearColor(.2f, .3f, .3f, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		
 		camera.HandleInput(window);
 		camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
 
@@ -213,7 +215,12 @@ int main()
 		light_vao.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);*/
 		//-------------------Original------------------
-		cube.Draw(camera);
+
+		//Camera camera
+		//
+
+		cube.Draw(&camera);
+		cube2.Draw(&camera);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -225,6 +232,8 @@ int main()
 	obj_shader.Delete();
 	brick_texture.Delete();*/
 	//-------------------Original------------------
+
+	cube.Dispose();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
