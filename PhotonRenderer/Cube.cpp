@@ -1,47 +1,47 @@
 #include "Cube.h"
 
-Cube::Cube():
-	m_basic_shader("basic.vert", "basic.frag"), 
-	m_position(glm::vec3(0,0,0)), 
-	m_scale(glm::vec3(1,1,1))
-{	
+Cube::Cube() :
+	m_shader("basic.vert", "basic.frag"),
+	m_position(glm::vec3(0, 0, 0)),
+	m_scale(glm::vec3(1, 1, 1))
+{
 	Init();
 }
 
-Cube::Cube(float scale, glm::vec3 position):
-	m_basic_shader("basic.vert", "basic.frag"),
+Cube::Cube(float scale, glm::vec3 position) :
+	m_shader("basic.vert", "basic.frag"),
 	m_position(position),
 	m_scale(glm::vec3(scale, scale, scale))
 {
 	Init();
 }
 
-Cube::Cube(float scale, float posistion_x, float position_y, float position_z):
-	m_basic_shader("basic.vert", "basic.frag"),
+Cube::Cube(float scale, float posistion_x, float position_y, float position_z) :
+	m_shader("basic.vert", "basic.frag"),
 	m_position(glm::vec3(posistion_x, position_y, position_z)),
 	m_scale(glm::vec3(scale, scale, scale))
 {
 	Init();
 }
 
-Cube::Cube(float scale, float posistion_x, float position_y, float position_z, Shader& shader):
-	m_basic_shader(shader),
+Cube::Cube(float scale, float posistion_x, float position_y, float position_z, Shader& shader) :
+	m_shader(shader),
 	m_position(glm::vec3(posistion_x, position_y, position_z)),
 	m_scale(glm::vec3(scale, scale, scale))
 {
 	Init();
 }
 
-Cube::Cube(float width, float height, float depth, glm::vec3 position):
-	m_basic_shader("basic.vert", "basic.frag"),
+Cube::Cube(float width, float height, float depth, glm::vec3 position) :
+	m_shader("basic.vert", "basic.frag"),
 	m_position(position),
 	m_scale(glm::vec3(width, height, depth))
 {
 	Init();
 }
 
-Cube::Cube(float width, float height, float depth, glm::vec3 position, Shader& shader):
-	m_basic_shader(shader),
+Cube::Cube(float width, float height, float depth, glm::vec3 position, Shader& shader) :
+	m_shader(shader),
 	m_position(position),
 	m_scale(glm::vec3(width, height, depth))
 {
@@ -49,7 +49,7 @@ Cube::Cube(float width, float height, float depth, glm::vec3 position, Shader& s
 }
 
 Cube::Cube(float width, float height, float depth, float position_x, float position_y, float position_z) :
-	m_basic_shader("basic.vert", "basic.frag"),
+	m_shader("basic.vert", "basic.frag"),
 	m_position(glm::vec3(position_x, position_y, position_z)),
 	m_scale(glm::vec3(width, height, depth))
 {
@@ -57,23 +57,23 @@ Cube::Cube(float width, float height, float depth, float position_x, float posit
 }
 
 Cube::Cube(float width, float height, float depth, float position_x, float position_y, float position_z, Shader& shader) :
-	m_basic_shader(shader),
+	m_shader(shader),
 	m_position(glm::vec3(position_x, position_y, position_z)),
 	m_scale(glm::vec3(width, height, depth))
 {
 	Init();
 }
 
-Cube::Cube(glm::vec3 scale, glm::vec3 position):
-	m_basic_shader("basic.vert", "basic.frag"),
+Cube::Cube(glm::vec3 scale, glm::vec3 position) :
+	m_shader("basic.vert", "basic.frag"),
 	m_position(position),
 	m_scale(scale)
 {
 	Init();
 }
 
-Cube::Cube(glm::vec3 scale, glm::vec3 position, Shader& shader):
-	m_basic_shader(shader),
+Cube::Cube(glm::vec3 scale, glm::vec3 position, Shader& shader) :
+	m_shader(shader),
 	m_position(position),
 	m_scale(scale)
 {
@@ -81,7 +81,7 @@ Cube::Cube(glm::vec3 scale, glm::vec3 position, Shader& shader):
 }
 
 Cube::Cube(glm::vec3 scale, float position_x, float position_y, float position_z) :
-	m_basic_shader("basic.vert", "basic.frag"),
+	m_shader("basic.vert", "basic.frag"),
 	m_position(glm::vec3(position_x, position_y, position_z)),
 	m_scale(scale)
 {
@@ -90,12 +90,11 @@ Cube::Cube(glm::vec3 scale, float position_x, float position_y, float position_z
 
 void Cube::Draw(Camera* camera)
 {
-	glm::vec3 pos = glm::vec3(0.0f, 0.0f, 0.0f);
-	//glm::mat4 model = glm::mat4(1.0);
-	glm::vec4 color = glm::vec4(1, 1, 1, 1);
-	//model = glm::translate(model, pos);
-
-	m_basic_shader.Activate();
+	//glm::vec3 pos = glm::vec3(0.0f, 0.0f, 0.0f);
+	////glm::mat4 model = glm::mat4(1.0);
+	//glm::vec4 color = glm::vec4(1, 1, 1, 1);
+	////model = glm::translate(model, pos);
+	m_shader.Activate();
 
 	if (m_texure != nullptr)
 	{
@@ -104,9 +103,9 @@ void Cube::Draw(Camera* camera)
 
 	if (camera != nullptr)
 	{
-		camera->SetUniform(m_basic_shader, "camMatrix");
+		camera->SetUniform(m_shader, "camMatrix");
 	}
-	m_basic_shader.SetUniformMat4("model", m_model);
+	m_shader.SetUniformMat4("model", m_model);
 
 	m_vao.Bind();
 	glDrawElements(GL_TRIANGLES, sizeof(m_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
@@ -125,7 +124,13 @@ void Cube::Dispose()
 		m_texure->Delete();
 		delete m_texure;
 	}
-	
+
+}
+
+void Cube::Translate(glm::vec3 translation)
+{
+	m_model = glm::translate(m_model, translation);
+	m_position += translation;
 }
 
 void Cube::Init()
@@ -136,9 +141,10 @@ void Cube::Init()
 		-(m_scale.x / 2), -(m_scale.y / 2),   m_scale.z / 2,  // front bottom left 0
 		 //Color
 		  1,1,1,
-		  //TODO: text coord
+		  //text coord
 		  0,0,
-		  //TODO: normal
+		  //normal
+		  0, 0, 1,
 
 		  m_scale.x / 2, -(m_scale.y / 2), m_scale.z / 2, // front bottom right 1
 		  //Color
@@ -146,6 +152,7 @@ void Cube::Init()
 		  //TODO: text coord
 		  1,0,
 		  //TODO: normal
+		  0, 0, 1,
 
 		  -(m_scale.x / 2),  m_scale.y / 2, m_scale.z / 2, // front up left 2
 		  //TODO: Color
@@ -153,121 +160,159 @@ void Cube::Init()
 		  //TODO: text coord
 		  0,1,
 		  //TODO: normal
+		  0, 0, 1,
 
 		  m_scale.x / 2,  m_scale.y / 2,   m_scale.z / 2,  // front up right 3
 		  //Color
 		  1,1,1,
-		  //TODO: text coord
+		  //text coord
 		  1,1,
-		  //TODO: normal
+		  //normal
+		  0, 0, 1,
 
 		-(m_scale.x / 2),   m_scale.y / 2,    -(m_scale.z / 2),  // back up left 4
 		  //Color
 		  1,1,1,
-		  //TODO: text coord
+		  //text coord
 		  0,1,
-		  //TODO: normal
+		  //normal
+		  0, 0, -1,
 
 		  m_scale.x / 2,   m_scale.y / 2,  -(m_scale.z / 2), // back up right 5
 		  //Color
 		  1,1,1,
-		  //TODO: text coord
+		  //text coord
 		  1,1,
-		  //TODO: normal
+		  //normal
+		  0, 0, -1,
 
 		  m_scale.x / 2,    -(m_scale.y / 2),  -(m_scale.z / 2), // back bottom right 6
-		  //TODO: Color
+		  //Color
 		  1,1,1,
-		  //TODO: text coord
+		  //text coord
 		  1,0,
-		  //TODO: normal
+		  //normal
+		  0, 0, -1,
 
 		  -(m_scale.x / 2),    -(m_scale.y / 2),    -(m_scale.z / 2),  // back bottom left 7
-		  //TODO: Color
+		  //Color
 		  1,1,1,
-		  //TODO: text coord
+		  //text coord
 		  0,0,
-		  //TODO: normal
+		  //normal
+		  0, 0, -1,
 
 		  -(m_scale.x / 2), m_scale.y / 2, m_scale.z / 2, //left front up  8
 		  1,1,1,
 		  //Texture:
 		  1,1,
+		  //Normal:
+		  -1, 0, 0,
 
 		  -(m_scale.x / 2), -(m_scale.y / 2), m_scale.z / 2, //left front down 9
 		  1,1,1,
 		  //Texture:
-	      1,0,
+		  1,0,
+		  //Normal:
+		 -1, 0, 0,
 
 		-(m_scale.x / 2), m_scale.y / 2, -(m_scale.z / 2), //left back up 10
 		  1,1,1,
 		  //Texture:
 		  0,1,
+		  //Normal:
+		  -1, 0, 0,
 
 		-(m_scale.x / 2), -(m_scale.y / 2), -(m_scale.z / 2), //left back down 11
 		  1,1,1,
 		  //Texture:
 		  0,0,
+		  //Normal:
+		 -1, 0, 0,
 
 		  m_scale.x / 2, m_scale.y / 2, m_scale.z / 2, //right front up  12
 		  1,1,1,
 		  //Texture:
 		  0,1,
+		  //Normal:
+		  1, 0, 0,
 
 		  m_scale.x / 2, -(m_scale.y / 2), m_scale.z / 2, //right front down 13
 		  1,1,1,
 		  //Texture:
 		  0,0,
+	      //Normal:
+		  1, 0, 0,
 
 		  m_scale.x / 2, m_scale.y / 2, -(m_scale.z / 2), //right back up 14
 		  1,1,1,
 		  //Texture:
 		  1,1,
+		  //Normal:
+		  1, 0, 0,
 
 		  m_scale.x / 2, -(m_scale.y / 2), -(m_scale.z / 2), //right back down 15
 		  1,1,1,
 		  //Texture:
 		  1,0,
+	      //Normal:
+	      1, 0, 0,
 
 		  -(m_scale.x / 2), m_scale.y / 2, m_scale.z / 2, //up left front 16
 		  1,1,1,
 		  //Texture:
 		  0,0,
+		  //Normal:
+		  0, 1, 0,
 
 		  m_scale.x / 2, m_scale.y / 2, m_scale.z / 2, //up right front 17
 		  1, 1, 1,
 		  //Texture:
 		  1, 0,
-		  
+		  //Normal:
+		  0, 1, 0,
+
 		  -(m_scale.x / 2), m_scale.y / 2, -(m_scale.z / 2), //up left back 18
 		  1,1,1,
 		  //Texture:
 		  0,1,
+		  //Normal:
+		  0, 1, 0,
 
 		  m_scale.x / 2, m_scale.y / 2, -(m_scale.z / 2), //up right back 19
 		  1,1,1,
 		  //Texture:
 		  1,1,
+		  //Normal:
+		  0, 1, 0,
 
 		  -(m_scale.x / 2), -(m_scale.y / 2), m_scale.z / 2, //bottom left front 20
 		  1, 1, 1,
 		  //Texture:
 		  0, 1,
-		  
+		  //Normal:
+		  0, -1, 0,
+
 		  m_scale.x / 2, -(m_scale.y / 2), m_scale.z / 2, //bottom right front 21
 		  1, 1, 1,
 		  //Texture:
 		  1, 1,
-		  
+		  //Normal:
+		  0, -1, 0,
+
 		  -(m_scale.x / 2), -(m_scale.y / 2), -(m_scale.z / 2), //bottom left back 22
 		  1, 1, 1,
 		  //Texture:
 		  0, 0,
-		  
+		  //Normal:
+		  0, -1, 0,
+
 		  m_scale.x / 2, -(m_scale.y / 2), -(m_scale.z / 2), //bottom right back 23
 		  1, 1, 1,
 		  //Texture:
 		  1, 0,
+		  //Normal:
+		  0, -1, 0,
 	};
 
 	m_indices_list =
@@ -278,7 +323,7 @@ void Cube::Init()
 		4, 6, 7,
 		8, 9, 10,
 		10, 9, 11,
-		12, 13, 14, 
+		12, 13, 14,
 		13, 14, 15,
 		16, 17, 18,
 		18, 19, 17,
@@ -294,11 +339,11 @@ void Cube::Init()
 
 	m_vbo = new VertexBuffer(m_vertices_ptr, sizeof(GLfloat) * m_vertex_data_list.size());
 	m_ibo = new IndexBuffer(m_indices_ptr, sizeof(GLuint) * m_indices_list.size());
-	/*VertexBuffer vbo(m_vertices_ptr, sizeof(GLfloat) * m_vertex_data_list.size());
-	IndexBuffer ibo(m_indices_ptr, sizeof(GLuint) * m_indices_list.size());*/
-	m_vao.LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-	m_vao.LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	m_vao.LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+	m_vao.LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	m_vao.LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	m_vao.LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	m_vao.LinkAttrib(*m_vbo, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 
 	m_vao.Unbind();
 	m_vbo->Unbind();
@@ -308,17 +353,16 @@ void Cube::Init()
 	glm::vec4 color = glm::vec4(1, 1, 1, 1);
 	m_model = glm::translate(m_model, m_position);
 
-	m_basic_shader.Activate();
-	m_basic_shader.SetUniformMat4("model", m_model);
-	m_basic_shader.SetUniformVec4("Color", color);
+	m_shader.Activate();
+	m_shader.SetUniformMat4("model", m_model);
 }
 
 void Cube::LoadTexture(const std::string& file_path)
 {
 	m_texure = new Texture(file_path.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	m_basic_shader.Activate();
-	m_basic_shader.SetInt("tex0", 0);
-	m_basic_shader.SetUniformVec4("Color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+	m_shader.Activate();
+	m_shader.SetInt("tex0", 0);
+	m_shader.SetUniformVec4("Color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 	m_texure->Unbind();
 }
 

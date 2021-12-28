@@ -93,7 +93,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	//using core profile(contains only modern opengl functions)
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
 
 	//Create the glfw window object
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "PhotonRenderer", NULL, NULL);
@@ -179,10 +179,19 @@ int main()
 	
 	//-------------------Original------------------
 
+	Shader light_shader("light.vert", "light.frag");
+
 	Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, 2.0f));
 	Cube cube(glm::vec3(.5f, 0.5f, 0.5f), glm::vec3(0.0f, 0.0f, 0.0f));
 	cube.LoadTexture("resources/brick.png");
-	Cube cube2(0.1f, 0.1f, 0.1f, glm::vec3(.5f, 0.2f, 0.0f));
+	
+	Cube light(glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(.5f, 0.2f, 0.0f), light_shader);
+	light.GetShader().Activate();
+	light.GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
+
+	cube.GetShader().Activate();
+	cube.GetShader().SetUniformVec3("lightPosition", glm::vec3(.5f, 0.2f, 0.0f));
+	cube.GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
 	//Cube cube3(0.5f, 0.5f, 0.5f, glm::vec3(.3f, 0.6f, 0.0f));
 
 	float rotation = 0;
@@ -220,7 +229,13 @@ int main()
 		//
 
 		cube.Draw(&camera);
-		cube2.Draw(&camera);
+		cube.GetShader().SetUniformVec3("lightPosition", light.GetPosition());
+		cube.GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
+		cube.GetShader().SetUniformVec3("camPos", camera.Position());
+
+		light.Draw(&camera);
+		//light.Translate(glm::vec3(-0.01f, 0, 0.01f));
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

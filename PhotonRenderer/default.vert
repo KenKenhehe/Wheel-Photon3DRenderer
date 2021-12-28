@@ -9,8 +9,6 @@ out vec2 texCoord;
 out vec3 current_pos;
 out vec3 normal_frag;
 
-uniform float scale;
-
 uniform mat4 model;
 uniform mat4 camMatrix;
 

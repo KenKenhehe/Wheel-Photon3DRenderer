@@ -29,6 +29,11 @@ public:
 	void Draw(Camera* camera = nullptr);
 	void Dispose();
 	void LoadTexture(const std::string& file_path);
+
+	Shader GetShader() { return m_shader; };
+	glm::vec3 GetPosition() { return m_position; }
+
+	void Translate(glm::vec3 translation);
 private:
 	void Init();
 	
@@ -38,7 +43,7 @@ private:
 	glm::vec3 m_position;
 	glm::vec3 m_scale;
 	glm::mat4 m_model;
-	Shader m_basic_shader;
+	Shader m_shader;
 	VertexArray m_vao;
 
 	VertexBuffer* m_vbo;
