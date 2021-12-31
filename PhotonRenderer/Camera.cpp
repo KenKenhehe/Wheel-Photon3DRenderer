@@ -9,11 +9,13 @@ void Camera::UpdateMatrix(float FOVdeg, float near_plane, float far_plane)
 	projection = glm::perspective(glm::radians(FOVdeg), (float)(m_width / m_height), near_plane, far_plane);
 
 	m_cam_matrix = projection * view;
+	m_view_matrix = view;
 }
 
 void Camera::SetUniform(Shader& shader, const std::string& uniform)
 {
 	shader.SetUniformMat4(uniform, m_cam_matrix);
+	shader.SetUniformMat4("view", m_view_matrix);
 }
 
 void Camera::HandleInput(GLFWwindow* window)
@@ -67,7 +69,7 @@ void Camera::HandleInput(GLFWwindow* window)
 		glfwGetCursorPos(window, &mouse_x, &mouse_y);
 
 		float rot_x = m_sensitivity * (float)(mouse_y - (m_height / 2)) / m_height;
-		float rot_y = m_sensitivity * (float)(mouse_x - (m_height / 2)) / m_height;
+		float rot_y = m_sensitivity * (float)(mouse_x - (m_width / 2)) / m_width;
 
 		glm::vec3 new_rotation = 
 			glm::rotate(m_rotation, glm::radians(-rot_x), glm::normalize(glm::cross(m_rotation, m_up)));

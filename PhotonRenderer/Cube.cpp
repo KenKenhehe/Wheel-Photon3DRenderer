@@ -2,7 +2,7 @@
 
 Cube::Cube() :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(glm::vec3(0, 0, 0)),
+	Entity(glm::vec3(0, 0, 0)),
 	m_scale(glm::vec3(1, 1, 1))
 {
 	Init();
@@ -10,7 +10,7 @@ Cube::Cube() :
 
 Cube::Cube(float scale, glm::vec3 position) :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(position),
+	Entity(position),
 	m_scale(glm::vec3(scale, scale, scale))
 {
 	Init();
@@ -18,7 +18,7 @@ Cube::Cube(float scale, glm::vec3 position) :
 
 Cube::Cube(float scale, float posistion_x, float position_y, float position_z) :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(glm::vec3(posistion_x, position_y, position_z)),
+	Entity(glm::vec3(posistion_x, position_y, position_z)),
 	m_scale(glm::vec3(scale, scale, scale))
 {
 	Init();
@@ -26,7 +26,7 @@ Cube::Cube(float scale, float posistion_x, float position_y, float position_z) :
 
 Cube::Cube(float scale, float posistion_x, float position_y, float position_z, Shader& shader) :
 	m_shader(shader),
-	m_position(glm::vec3(posistion_x, position_y, position_z)),
+	Entity(glm::vec3(posistion_x, position_y, position_z)),
 	m_scale(glm::vec3(scale, scale, scale))
 {
 	Init();
@@ -34,7 +34,7 @@ Cube::Cube(float scale, float posistion_x, float position_y, float position_z, S
 
 Cube::Cube(float width, float height, float depth, glm::vec3 position) :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(position),
+	Entity(position),
 	m_scale(glm::vec3(width, height, depth))
 {
 	Init();
@@ -42,7 +42,7 @@ Cube::Cube(float width, float height, float depth, glm::vec3 position) :
 
 Cube::Cube(float width, float height, float depth, glm::vec3 position, Shader& shader) :
 	m_shader(shader),
-	m_position(position),
+	Entity(position),
 	m_scale(glm::vec3(width, height, depth))
 {
 	Init();
@@ -50,7 +50,7 @@ Cube::Cube(float width, float height, float depth, glm::vec3 position, Shader& s
 
 Cube::Cube(float width, float height, float depth, float position_x, float position_y, float position_z) :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(glm::vec3(position_x, position_y, position_z)),
+	Entity(glm::vec3(position_x, position_y, position_z)),
 	m_scale(glm::vec3(width, height, depth))
 {
 	Init();
@@ -58,7 +58,7 @@ Cube::Cube(float width, float height, float depth, float position_x, float posit
 
 Cube::Cube(float width, float height, float depth, float position_x, float position_y, float position_z, Shader& shader) :
 	m_shader(shader),
-	m_position(glm::vec3(position_x, position_y, position_z)),
+	Entity(glm::vec3(position_x, position_y, position_z)),
 	m_scale(glm::vec3(width, height, depth))
 {
 	Init();
@@ -66,7 +66,7 @@ Cube::Cube(float width, float height, float depth, float position_x, float posit
 
 Cube::Cube(glm::vec3 scale, glm::vec3 position) :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(position),
+	Entity(position),
 	m_scale(scale)
 {
 	Init();
@@ -74,7 +74,7 @@ Cube::Cube(glm::vec3 scale, glm::vec3 position) :
 
 Cube::Cube(glm::vec3 scale, glm::vec3 position, Shader& shader) :
 	m_shader(shader),
-	m_position(position),
+	Entity(position),
 	m_scale(scale)
 {
 	Init();
@@ -82,7 +82,7 @@ Cube::Cube(glm::vec3 scale, glm::vec3 position, Shader& shader) :
 
 Cube::Cube(glm::vec3 scale, float position_x, float position_y, float position_z) :
 	m_shader("basic.vert", "basic.frag"),
-	m_position(glm::vec3(position_x, position_y, position_z)),
+	Entity(glm::vec3(position_x, position_y, position_z)),
 	m_scale(scale)
 {
 	Init();
@@ -108,7 +108,7 @@ void Cube::Draw(Camera* camera)
 	m_shader.SetUniformMat4("model", m_model);
 
 	m_vao.Bind();
-	glDrawElements(GL_TRIANGLES, sizeof(m_indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, sizeof(GLuint) * m_indices_list.size() / sizeof(int), GL_UNSIGNED_INT, 0);
 }
 
 void Cube::Dispose()
@@ -127,11 +127,16 @@ void Cube::Dispose()
 
 }
 
-void Cube::Translate(glm::vec3 translation)
-{
-	m_model = glm::translate(m_model, translation);
-	m_position += translation;
-}
+//void Cube::Translate(glm::vec3 translation)
+//{
+//	m_model = glm::translate(m_model, translation);
+//	m_position += translation;
+//}
+//
+//void Cube::Rotate(float angle, glm::vec3 axis)
+//{
+//	m_model = glm::rotate(m_model, glm::radians(angle), axis);
+//}
 
 void Cube::Init()
 {
@@ -355,6 +360,7 @@ void Cube::Init()
 
 	m_shader.Activate();
 	m_shader.SetUniformMat4("model", m_model);
+	m_shader.SetUniformVec4("Color", color);
 }
 
 void Cube::LoadTexture(const std::string& file_path)
