@@ -182,9 +182,11 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClCompile Include="..\glad.c" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="PhotonRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PhotonUtil.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -201,6 +203,7 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="PhotonRenderer.h" />
+    <ClInclude Include="PhotonUtil.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />

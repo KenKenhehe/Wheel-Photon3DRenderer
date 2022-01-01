@@ -1,7 +1,9 @@
 #ifndef VERTEX_ARRAY_H
 #define VERTEX_ARRAY_H
+
 #include "VertexBuffer.h"
 #include "Core.h"
+#include <iostream>
 class PHOTON_API VertexArray
 {
 public:

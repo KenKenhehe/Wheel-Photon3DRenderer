@@ -14,21 +14,22 @@ void RenderScene::Render()
 	test_obj->Draw(cam);
 
 	//Specular model
-	//test_obj->GetShader().SetUniformVec3("lightPosition", light_cube->GetPosition());
-	//test_obj->GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
-	//test_obj->GetShader().SetUniformVec4("ReflectionColor", glm::vec4(1, .1, .1, 1));
+	test_obj->GetShader().SetUniformVec3("lightPosition", light_cube->GetPosition());
+	test_obj->GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
+	test_obj->GetShader().SetUniformVec4("ReflectionColor", glm::vec4(1, .1, .1, 1));
 
-	//Soild Color
-	test_obj->GetShader().SetUniformVec4("SolidColor", glm::vec4(1, .1, .1, 1));
+	//Soild Color(ambient?) model
+	//test_obj->GetShader().SetUniformVec4("SolidColor", glm::vec4(1, .1, .1, 1));
 }
 
 void RenderScene::OnCreate()
 {
-	test_obj = new Cube(0.5f, 0.5f, 0.5f, glm::vec3(.0f, 0.0f, 0.0f));
+	test_obj = new Photon::Cube(0.5f, 0.5f, 0.5f, glm::vec3(400.0f, 400.0f, 0.0f));
 	cam = new Camera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
 	light_shader = new Shader("light.vert", "light.frag");
 
-	light_cube = new Cube(glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(.5f, 0.2f, 0.0f), *light_shader);
+	light_cube = new Photon::Cube(glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(600.0f, 500.0f, 0.0f));
+	light_cube->LoadShader(*light_shader);
 	light_cube->GetShader().Activate();
 	light_cube->GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
 }

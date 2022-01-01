@@ -1,5 +1,6 @@
 #include "VertexArray.h"
 
+
 VertexArray::VertexArray()
 {
 	//generate 1 VAO and VBO object

@@ -1,5 +1,6 @@
 #pragma once
 #include "PhotonRenderer.h"
+#include "Cube.h"
 class RenderScene : public Scene
 {
 public:
@@ -8,8 +9,8 @@ public:
 	void OnCreate() override;
 	void Dispose() override;
 public:
-	Cube* test_obj;
-	Cube* light_cube;
+	Photon::Cube* test_obj;
+	Photon::Cube* light_cube;
 	Camera* cam;
 	Shader* light_shader;
 };

@@ -12,10 +12,12 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
-#include "Cube.h"
+//#include "Cube.h"
 //#include "Plane.h"
 #include "Scene.h"
 #include "Core.h"
+
+
 
 namespace Photon
 {
@@ -32,16 +34,15 @@ namespace Photon
 		int height;
 		const char* title;
 	};
-
+	
 	class PHOTON_API PhotonApplication
 	{
 	public:
 		PhotonApplication(Scene& mainScene, PhotonConfig config);
-
+		static PhotonApplication* instance;
 	public:
 		PhotonAppStatus GetPhotonStatus() { return m_current_status; }
 	private:
 		PhotonAppStatus m_current_status = PhotonAppStatus::STATUS_EMPTY;
 	};
 }
-

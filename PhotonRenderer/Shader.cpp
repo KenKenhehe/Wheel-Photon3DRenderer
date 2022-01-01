@@ -1,5 +1,4 @@
 #include "Shader.h"
-#include <Windows.h>
 
 std::string get_file_contents(const char* file_name)
 {
@@ -51,6 +50,7 @@ Shader::Shader(const char* vert_path, const char* frag_path)
 	//Delete shaders because these are already attached to the program
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+
 }
 
 bool Shader::HasCompileError(GLuint id, unsigned int type)
@@ -125,7 +125,7 @@ int Shader::GetUniformLocation(const std::string& name)
 	if (m_uniform_location_cache.find(name) != m_uniform_location_cache.end())
 		return m_uniform_location_cache[name];
 	int location = glGetUniformLocation(ID, name.c_str());
-	if(location == -1)
+	if (location == -1)
 		std::cout << "Warning! : Uniform variable " << name << " does not exist." << std::endl;
 	m_uniform_location_cache[name] = location;
 	return location;

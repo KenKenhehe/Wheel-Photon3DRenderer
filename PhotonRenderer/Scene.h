@@ -3,7 +3,7 @@
 class Scene
 {
 public:
-	Scene(){}
+	Scene() {};
 public:
 	void virtual OnCreate() {};
 	void virtual Render() {};
@@ -17,8 +17,10 @@ public:
 	int GetWidth() { return m_current_width; }
 	int GetHeight() { return m_current_height; }
 private:
+	
 	GLFWwindow* m_current_window;
 	int m_current_width;
 	int m_current_height;
+	
 };
 
