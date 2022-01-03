@@ -1,15 +1,15 @@
+#ifndef PHOTON_ENTITY_H
+#define PHOTON_ENTITY_H
+
 #include <vector>
 #include <glm\glm.hpp>
 #include "VertexBuffer.h"
 #include "VertexArray.h"
 #include "IndexBuffer.h"
-#include "Shader.h"
 #include "Camera.h"
 #include "Core.h"
-
+#include "Texture.h"
 #include "PhotonUtil.h"
-#include "PhotonRenderer.h"
-
 
 namespace Photon
 {
@@ -30,10 +30,10 @@ namespace Photon
 		}
 
 		void virtual Draw(Camera* camera = nullptr) {};
+		void SetCamera(Camera* cam);
 	protected:
 		void virtual Dispose() {};
 		bool virtual Init();
-
 	protected:
 		glm::vec3 m_position = glm::vec3(0, 0, 0);
 		glm::mat4 m_model = glm::mat4(1.0f);
@@ -48,9 +48,12 @@ namespace Photon
 		GLfloat* m_vertices_ptr = nullptr;
 		GLuint* m_indices_ptr = nullptr;
 
+		Camera* m_target_camera;
+
 		int m_screen_width;
 		int m_screen_height;
 
 		bool m_init_success;
 	};
 }
+#endif // !PHOTON_ENTITY_H

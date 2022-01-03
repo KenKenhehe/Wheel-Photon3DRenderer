@@ -1,4 +1,5 @@
-#include "Texture.h"
+#ifndef PHOTON_CUBE_H
+#define PHOTON_CUBE_H
 
 #include <stb\stb_image.h> 
 #include <glm\gtc\matrix_transform.hpp>
@@ -28,15 +29,14 @@ namespace Photon
 		Shader GetShader() { return *m_shader; };
 		glm::vec3 GetPosition() { return m_position; }
 
-		//void Translate(glm::vec3 translation);
-		//void Rotate(float angle, glm::vec3 axis);
 	private:
 		bool Init() override;
 
 	private:
 		glm::vec3 m_scale;
 		Shader* m_shader;
-		Texture* m_texure;
+		Texture* m_texture;
 	};
 
 }
+#endif // !PHOTON_CUBE_H

@@ -1,26 +1,22 @@
 #pragma once
+
 #include <glad\glad.h>
-#include <GLFW\glfw3.h>
-#include <iostream>
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
-#include "VertexArray.h"
-#include "Texture.h"
-#include "Camera.h"
 #include <stb\stb_image.h> 
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
-//#include "Cube.h"
-//#include "Plane.h"
-#include "Scene.h"
-#include "Core.h"
 
+#include <iostream>
+#include <vector>
+
+#include "Core.h"
+#include "Scene.h"
 
 
 namespace Photon
 {
+	class Entity;
+	class Camera;
 	enum class PhotonAppStatus
 	{
 		STATUS_EMPTY = 0,
@@ -42,7 +38,14 @@ namespace Photon
 		static PhotonApplication* instance;
 	public:
 		PhotonAppStatus GetPhotonStatus() { return m_current_status; }
+		void AddEntity(Entity* entity) { m_entities.emplace_back(entity); };
+		void SetMainCamera(Camera* cam);
+		GLFWwindow* GetWindow() { return m_current_window; }
 	private:
 		PhotonAppStatus m_current_status = PhotonAppStatus::STATUS_EMPTY;
+		std::vector<Camera*> m_cameras_in_scene;
+		std::vector<Entity*> m_entities;
+		GLFWwindow* m_current_window = nullptr;
+		Camera* m_main_camera = nullptr;
 	};
 }

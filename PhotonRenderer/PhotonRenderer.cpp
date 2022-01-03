@@ -1,4 +1,5 @@
 #include "PhotonRenderer.h"
+#include "Entity.h"
 
 namespace Photon
 {
@@ -36,6 +37,7 @@ namespace Photon
 
 		glfwMakeContextCurrent(window);
 		m_current_status = PhotonAppStatus::STATUS_CREATE_SUCCESS;
+		m_current_window = window;
 		
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		gladLoadGL();
@@ -45,6 +47,10 @@ namespace Photon
 		glfwSwapBuffers(window);
 
 		mainScene.OnCreate();
+		for (int i = 0; i < m_entities.size(); i++)
+		{
+			m_entities[i]->SetCamera(m_main_camera);
+		}
 
 		glEnable(GL_DEPTH_TEST);
 		while (!glfwWindowShouldClose(window))
@@ -56,5 +62,10 @@ namespace Photon
 			glfwPollEvents();
 		}
 		mainScene.Dispose();
+	}
+	void PhotonApplication::SetMainCamera(Camera* cam)
+	{
+		if (m_main_camera == nullptr) 
+			m_main_camera = cam;
 	}
 }

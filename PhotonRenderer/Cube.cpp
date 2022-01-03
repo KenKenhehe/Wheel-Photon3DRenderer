@@ -77,14 +77,14 @@ namespace Photon
 		////model = glm::translate(model, pos);
 		m_shader->Activate();
 
-		if (m_texure != nullptr)
+		if (m_texture != nullptr)
 		{
-			m_texure->Bind();
+			m_texture->Bind();
 		}
 
-		if (camera != nullptr)
+		if (m_target_camera != nullptr)
 		{
-			camera->SetUniform(*m_shader, "camMatrix");
+			m_target_camera->SetUniform(*m_shader, "camMatrix");
 		}
 		m_shader->SetUniformMat4("model", m_model);
 
@@ -101,10 +101,10 @@ namespace Photon
 		delete m_vbo;
 		delete m_shader;
 
-		if (m_texure != nullptr)
+		if (m_texture != nullptr)
 		{
-			m_texure->Delete();
-			delete m_texure;
+			m_texture->Delete();
+			delete m_texture;
 		}
 	}
 
@@ -309,11 +309,10 @@ namespace Photon
 			22, 23, 21
 		};
 
-		std::cout << "Test map: " << map(700, 0, 800, -1, 1) << std::endl;
+		//std::cout << "Test map: " << map(700, 0, 800, -1, 1) << std::endl;
 
 		m_vertices_ptr = m_vertex_data_list.data();
 		m_indices_ptr = m_indices_list.data();
-
 
 
 		m_vao = new VertexArray();
@@ -345,11 +344,11 @@ namespace Photon
 
 	void Cube::LoadTexture(const std::string& file_path)
 	{
-		m_texure = new Texture(file_path.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+		m_texture = new Texture(file_path.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 		m_shader->Activate();
 		m_shader->SetInt("tex0", 0);
 		m_shader->SetUniformVec4("Color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-		m_texure->Unbind();
+		m_texture->Unbind();
 	}
 
 	void Cube::LoadDefaultShader()
