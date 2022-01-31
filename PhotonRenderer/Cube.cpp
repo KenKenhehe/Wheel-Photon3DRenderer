@@ -309,8 +309,6 @@ namespace Photon
 			22, 23, 21
 		};
 
-		//std::cout << "Test map: " << map(700, 0, 800, -1, 1) << std::endl;
-
 		m_vertices_ptr = m_vertex_data_list.data();
 		m_indices_ptr = m_indices_list.data();
 

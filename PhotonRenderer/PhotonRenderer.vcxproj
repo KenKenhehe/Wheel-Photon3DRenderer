@@ -184,10 +184,13 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="PhotonRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PhotonUtil.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -202,9 +205,12 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="PhotonRenderer.h" />
     <ClInclude Include="PhotonUtil.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
