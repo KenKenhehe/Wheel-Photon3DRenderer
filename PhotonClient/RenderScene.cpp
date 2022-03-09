@@ -9,11 +9,9 @@ void RenderScene::Render()
 	test_obj->Draw();
 	/*light_cube->Draw();
 
-	
-
 	plane->Draw();*/
 
-	m_line->Draw();
+	//m_point->Draw();
 
 	//Specular model
 	/*test_obj->GetShader().Activate();
@@ -38,7 +36,8 @@ void RenderScene::Render()
 
 void RenderScene::OnCreate()
 {
-	m_line = new Photon::Line(glm::vec2(100, 100), glm::vec2(600, 400));
+	//m_point = new Photon::Point(glm::vec2(600, 400));
+
 	test_obj = new Photon::Cube(0.5f, 0.5f, 0.5f, glm::vec3(400.0f, 400.0f, 0.0f));
 	cam = new Photon::Camera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
 	/*light_shader = new Shader("light.vert", "light.frag");
@@ -48,13 +47,13 @@ void RenderScene::OnCreate()
 	light_cube->LoadShader(*light_shader);
 	light_cube->GetShader().Activate();
 	light_cube->GetShader().SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));*/
-	
 }
 
 void RenderScene::Dispose()
 {
-	/*delete test_obj;
-	delete cam;
+	delete test_obj;
+	/*delete cam;
 	delete light_cube;*/
-	delete m_line;
+	//delete m_line;
+	delete m_point;
 }

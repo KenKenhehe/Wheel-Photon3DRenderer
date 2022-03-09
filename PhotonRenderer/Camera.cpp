@@ -26,7 +26,7 @@ namespace Photon
 
 		view = glm::lookAt(m_position, m_position + m_rotation, m_up);
 		projection = glm::perspective(glm::radians(FOVdeg), (float)(m_width / m_height), near_plane, far_plane);
-
+		
 		m_cam_matrix = projection * view;
 		m_view_matrix = view;
 	}
@@ -38,7 +38,7 @@ namespace Photon
 
 		view = glm::lookAt(m_position, m_position + m_rotation, m_up);
 		projection = glm::perspective(glm::radians(m_fov), (float)(m_width / m_height), m_near_plane, m_far_plane);
-
+		//projection = glm::ortho(0, m_width, m_height, 0, 0, 1000);
 		m_cam_matrix = projection * view;
 		m_view_matrix = view;
 	}

@@ -77,9 +77,9 @@ namespace Photon
 
 	void Line::LoadDefaultShader()
 	{
-		m_shader = new Shader("basicLine.vert", "basicLine.frag");
+		m_shader = new Shader("basicTransform.vert", "basicTransform.frag");
 		m_shader->Activate();
 		glm::vec4 color = glm::vec4(1, 1, 1, 1);
-		m_shader->SetUniformVec4("line_color", color);
+		m_shader->SetUniformVec4("color", color);
 	}
 }
