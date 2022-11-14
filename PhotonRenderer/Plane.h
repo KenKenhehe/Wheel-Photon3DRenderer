@@ -17,15 +17,13 @@ namespace Photon
 		void LoadDefaultShader();
 		void LoadShader(Shader& shader);
 
-		Shader GetShader() { return *m_shader; }
 	private:
 		bool Init() override;
 	private:
 
 		float m_width;
 		float m_height;
-		Shader* m_shader;
-		Texture* m_texture;
+		Texture* m_texture = nullptr;
 		/*float* m_vertices;
 		Shader shader;*/
 	};

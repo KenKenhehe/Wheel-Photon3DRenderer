@@ -26,7 +26,6 @@ namespace Photon
 
 		void LoadDefaultShader();
 		void LoadShader(Shader& shader);
-		Shader GetShader() { return *m_shader; };
 		glm::vec3 GetPosition() { return m_position; }
 
 	private:
@@ -34,8 +33,7 @@ namespace Photon
 
 	private:
 		glm::vec3 m_scale;
-		Shader* m_shader;
-		Texture* m_texture;
+		Texture* m_texture = nullptr;
 	};
 
 }

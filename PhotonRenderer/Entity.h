@@ -13,6 +13,7 @@
 
 namespace Photon
 {
+	class Light;
 	class PHOTON_API Entity
 	{
 	public:
@@ -31,9 +32,13 @@ namespace Photon
 
 		void virtual Draw(Camera* camera = nullptr) {};
 		void SetCamera(Camera* cam);
+		void AddLightSource(Light* light_source);
+		Shader* GetShader() { return m_shader; };
+
 	protected:
 		void virtual Dispose() {};
 		bool virtual Init();
+		
 	protected:
 		glm::vec3 m_position = glm::vec3(0, 0, 0);
 		glm::mat4 m_model = glm::mat4(1.0f);
@@ -48,12 +53,15 @@ namespace Photon
 		GLfloat* m_vertices_ptr = nullptr;
 		GLuint* m_indices_ptr = nullptr;
 
-		Camera* m_target_camera;
+		Camera* m_target_camera = nullptr;
+		Light* m_light_source = nullptr;
 
-		int m_screen_width;
-		int m_screen_height;
+		Shader* m_shader = nullptr;
 
-		bool m_init_success;
+		int m_screen_width = 0;
+		int m_screen_height = 0;
+
+		bool m_init_success = false;
 	};
 }
 #endif // !PHOTON_ENTITY_H

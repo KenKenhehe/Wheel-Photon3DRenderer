@@ -50,6 +50,7 @@ namespace Photon
 		for (int i = 0; i < m_entities.size(); i++)
 		{
 			m_entities[i]->SetCamera(m_main_camera);
+			m_entities[i]->AddLightSource(m_current_light_source);
 		}
 
 		glEnable(GL_DEPTH_TEST);

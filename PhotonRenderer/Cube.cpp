@@ -353,9 +353,13 @@ namespace Photon
 	{
 		m_shader = new Shader("basic.vert", "basic.frag");
 		m_shader->Activate();
-		glm::vec4 color = glm::vec4(1, 1, 1, 1);
+		glm::vec4 color = glm::vec4(0, 0, 0, 0);
 		m_shader->SetUniformMat4("model", m_model);
-		m_shader->SetUniformVec4("Color", color);
+		m_shader->SetUniformVec4("SolidColor", color);
+
+		glm::vec4 light_color = glm::vec4(1, 1, 1, 1);
+		m_shader->SetUniformVec4("ReflectionColor", light_color);
+		m_shader->SetUniformVec4("lightColor", light_color);
 	}
 
 	void Cube::LoadShader(Shader& shader)

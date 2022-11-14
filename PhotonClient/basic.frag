@@ -16,7 +16,7 @@ uniform vec4 lightColor;
 
 void main()
 {
-   float ambient_intensity = 0.2;
+   float ambient_intensity = 0.7;
    vec3 normal = normalize(normal_frag);
    
    vec3 lightDirection = normalize(lightPos - FragPos);

@@ -1,7 +1,10 @@
 #include "Entity.h"
 #include "PhotonRenderer.h"
+#include "Light.h"
 
-//Photon::PhotonApplication* Photon::PhotonApplication::instance;
+#include <typeinfo>
+#include <iostream>
+
 namespace Photon
 {
 	bool Photon::Entity::Init()
@@ -24,5 +27,15 @@ namespace Photon
 	void Photon::Entity::SetCamera(Camera* cam)
 	{
 		m_target_camera = cam;
+	}
+	void Entity::AddLightSource(Light* light_source)
+	{
+		std::cout << typeid(light_source).name() << std::endl;
+ 		m_light_source = light_source;
+		m_shader->Activate();
+		m_shader->Activate();
+		m_shader->SetUniformVec3("lightPosition", light_source->GetPosition());
+		m_shader->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
+		m_shader->SetUniformVec4("ReflectionColor", glm::vec4(1, .1, .1, 1));
 	}
 }

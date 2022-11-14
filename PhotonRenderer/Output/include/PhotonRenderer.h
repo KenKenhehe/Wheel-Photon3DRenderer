@@ -17,6 +17,7 @@ namespace Photon
 {
 	class Entity;
 	class Camera;
+	class Light;
 	enum class PhotonAppStatus
 	{
 		STATUS_EMPTY = 0,
@@ -40,6 +41,7 @@ namespace Photon
 		PhotonAppStatus GetPhotonStatus() { return m_current_status; }
 		void AddEntity(Entity* entity) { m_entities.emplace_back(entity); };
 		void SetMainCamera(Camera* cam);
+		void SetCurrentLightSource(Light* light) { m_current_light_source = light; }
 		GLFWwindow* GetWindow() { return m_current_window; }
 	private:
 		PhotonAppStatus m_current_status = PhotonAppStatus::STATUS_EMPTY;
@@ -47,5 +49,7 @@ namespace Photon
 		std::vector<Entity*> m_entities;
 		GLFWwindow* m_current_window = nullptr;
 		Camera* m_main_camera = nullptr;
+
+		Light* m_current_light_source = nullptr;
 	};
 }
