@@ -97,7 +97,10 @@ namespace Photon
 		m_shader->Activate();
 		glm::vec4 color = glm::vec4(1, 1, 1, 1);
 		m_shader->SetUniformMat4("model", m_model);
-		m_shader->SetUniformVec4("Color", color);
+		//m_shader->SetUniformVec4("Color", color);
+		glm::vec4 light_color = glm::vec4(1, 1, 1, 1);
+		//m_shader->SetUniformVec4("ReflectionColor", light_color);
+		m_shader->SetUniformVec4("lightColor", light_color);
 	}
 	void Plane::LoadShader(Shader& shader)
 	{

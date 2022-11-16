@@ -331,8 +331,11 @@ namespace Photon
 
 		m_model = glm::mat4(1.0);
 		
-		float position_final_x = map(m_position.x, 0, 800, -1, 1);
-		float position_final_y = map(m_position.y, 0, 800, -1, 1);
+		int global_width = PhotonApplication::instance->GetConfig().width;
+		int global_height = PhotonApplication::instance->GetConfig().height;
+
+		float position_final_x = map(m_position.x, 0, global_width, -1, 1);
+		float position_final_y = map(m_position.y, 0, global_height, -1, 1);
 		m_position.x = position_final_x;
 		m_position.y = position_final_y;
 		m_model = glm::translate(m_model, m_position);
@@ -355,10 +358,10 @@ namespace Photon
 		m_shader->Activate();
 		glm::vec4 color = glm::vec4(0, 0, 0, 0);
 		m_shader->SetUniformMat4("model", m_model);
-		m_shader->SetUniformVec4("SolidColor", color);
+		//m_shader->SetUniformVec4("SolidColor", color);
 
 		glm::vec4 light_color = glm::vec4(1, 1, 1, 1);
-		m_shader->SetUniformVec4("ReflectionColor", light_color);
+		//m_shader->SetUniformVec4("ReflectionColor", light_color);
 		m_shader->SetUniformVec4("lightColor", light_color);
 	}
 

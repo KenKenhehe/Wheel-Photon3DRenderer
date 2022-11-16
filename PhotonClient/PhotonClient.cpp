@@ -11,8 +11,8 @@ int main()
 {
 	PhotonConfig config;
 	config.title = "test";
-	config.width = 800;
-	config.height = 800;
+	config.width = 1000;
+	config.height = 1000;
 	
 	RenderScene rs;
 

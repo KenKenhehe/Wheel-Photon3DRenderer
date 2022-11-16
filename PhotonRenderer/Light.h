@@ -9,6 +9,7 @@ namespace Photon {
 	public:
 		Light(glm::vec3 position);
 		glm::vec3 GetPosition() { return m_position; }
+		virtual void ApplyLighting(Entity* entity) = 0;
 	};
 }
 

@@ -43,6 +43,8 @@ namespace Photon
 		void SetMainCamera(Camera* cam);
 		void SetCurrentLightSource(Light* light) { m_current_light_source = light; }
 		GLFWwindow* GetWindow() { return m_current_window; }
+		PhotonConfig GetConfig() { return m_config; }
+		Camera* GetCamera() { return m_main_camera; }
 	private:
 		PhotonAppStatus m_current_status = PhotonAppStatus::STATUS_EMPTY;
 		std::vector<Camera*> m_cameras_in_scene;
@@ -51,5 +53,6 @@ namespace Photon
 		Camera* m_main_camera = nullptr;
 
 		Light* m_current_light_source = nullptr;
+		PhotonConfig m_config;
 	};
 }

@@ -7,6 +7,16 @@ namespace Photon
 	{
 		// make sure the viewport matches the new window dimensions; note that width and 
 		// height will be significantly larger than specified on retina displays.
+		
+		if (PhotonApplication::instance->GetCamera() != nullptr) 
+		{
+			PhotonApplication::instance->GetCamera()->SetHeight(height);
+			PhotonApplication::instance->GetCamera()->SetWidth(width);
+			PhotonApplication::instance->GetCamera()->UpdateMatrix(45.0f, 0.1f, 100.0f);
+		}
+		else {
+			std::cout << "Photon instance is null\n";
+		}
 		glViewport(0, 0, width, height);
 	}
 	PhotonApplication::PhotonApplication(Scene& mainScene, PhotonConfig config)
@@ -34,6 +44,8 @@ namespace Photon
 		mainScene.SetWindow(window);
 		mainScene.SetWidth(config.width);
 		mainScene.SetHeight(config.height);
+
+		m_config = config;
 
 		glfwMakeContextCurrent(window);
 		m_current_status = PhotonAppStatus::STATUS_CREATE_SUCCESS;

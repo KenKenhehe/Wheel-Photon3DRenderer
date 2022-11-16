@@ -31,7 +31,10 @@ namespace Photon
 		}
 
 		void virtual Draw(Camera* camera = nullptr) {};
+
 		void SetCamera(Camera* cam);
+		Camera* GetCamera() { return m_target_camera; }
+
 		void AddLightSource(Light* light_source);
 		Shader* GetShader() { return m_shader; };
 
@@ -54,7 +57,6 @@ namespace Photon
 		GLuint* m_indices_ptr = nullptr;
 
 		Camera* m_target_camera = nullptr;
-		Light* m_light_source = nullptr;
 
 		Shader* m_shader = nullptr;
 
