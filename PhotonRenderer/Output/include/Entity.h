@@ -38,6 +38,9 @@ namespace Photon
 		void AddLightSource(Light* light_source);
 		Shader* GetShader() { return m_shader; };
 
+		void SetCurrentAppPath(std::string path) { m_current_app_path = path; }
+		std::string GetCurrentPath() { return m_current_app_path; }
+
 	protected:
 		void virtual Dispose() {};
 		bool virtual Init();
@@ -64,6 +67,10 @@ namespace Photon
 		int m_screen_height = 0;
 
 		bool m_init_success = false;
+		bool m_has_texture = false;
+
+		std::string m_current_app_path;
+
 	};
 }
 #endif // !PHOTON_ENTITY_H

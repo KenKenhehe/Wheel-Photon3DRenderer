@@ -11,8 +11,8 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 	unsigned char* img_bytes = stbi_load(image, &widthImg, &heightImg, &numofColorChannel, 0);
 
 	glGenTextures(1, &ID);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, ID);
+	glActiveTexture(slot);
+	glBindTexture(texType, ID);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

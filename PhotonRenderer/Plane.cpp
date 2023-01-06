@@ -26,6 +26,7 @@ namespace Photon
 
 		if (m_texture != nullptr)
 		{
+			std::cout << "Binded texture on plane" << std::endl;
 			m_texture->Bind();
 		}
 
@@ -87,7 +88,7 @@ namespace Photon
 		m_position.x = position_final_x;
 		m_position.y = position_final_y;
 		m_model = glm::translate(m_model, m_position);
-		
+
 		return true;
 	}
 
@@ -95,12 +96,11 @@ namespace Photon
 	{
 		m_shader = new Shader("basic.vert", "basic.frag");
 		m_shader->Activate();
-		glm::vec4 color = glm::vec4(1, 1, 1, 1);
 		m_shader->SetUniformMat4("model", m_model);
-		//m_shader->SetUniformVec4("Color", color);
-		glm::vec4 light_color = glm::vec4(1, 1, 1, 1);
-		//m_shader->SetUniformVec4("ReflectionColor", light_color);
-		m_shader->SetUniformVec4("lightColor", light_color);
+
+		glm::vec4 objectColor = glm::vec4(1, 0, 0, 1);
+		m_shader->SetUniformVec4("ObjectColor", objectColor);
+
 	}
 	void Plane::LoadShader(Shader& shader)
 	{

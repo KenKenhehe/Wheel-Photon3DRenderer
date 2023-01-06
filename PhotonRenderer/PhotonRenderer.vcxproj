@@ -180,12 +180,15 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\glad.c" />
+    <ClCompile Include="BasicMesh.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="PhotonRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PhotonUtil.cpp" />
@@ -201,6 +204,7 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicMesh.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Cube.h" />
@@ -208,6 +212,8 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="PhotonRenderer.h" />
     <ClInclude Include="PhotonUtil.h" />
     <ClInclude Include="Plane.h" />

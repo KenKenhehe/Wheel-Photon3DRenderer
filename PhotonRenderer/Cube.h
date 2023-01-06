@@ -19,6 +19,8 @@ namespace Photon
 		Cube(float width, float height, float depth, float posistion_x, float position_y, float position_z);
 		Cube(glm::vec3 scale, glm::vec3 position);
 		Cube(glm::vec3 scale, float posistion_x, float position_y, float position_z);
+
+		~Cube();
 	public:
 		void Draw(Camera* camera = nullptr) override;
 		void Dispose() override;

@@ -9,7 +9,6 @@ namespace Photon
 	{
 	public:
 		PointLight(glm::vec3 position, 
-			glm::vec4 reflection_color = glm::vec4(1, 1, 1, 1),
 			glm::vec4 light_color = glm::vec4(1, 1, 1, 1));
 	public:
 		glm::vec4 GetReflectionColor() const { return m_reflection_color; }

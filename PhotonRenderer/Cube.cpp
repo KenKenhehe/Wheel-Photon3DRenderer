@@ -63,6 +63,17 @@ namespace Photon
 			LoadDefaultShader();
 	}
 
+	Cube::~Cube()
+	{
+		delete m_shader;
+		if (m_texture != nullptr) {
+			delete m_texture;
+		}
+		delete m_ibo;
+		delete m_vao;
+		delete m_vbo;
+	}
+
 	void Cube::Draw(Camera* camera)
 	{
 		if (!m_init_success)
@@ -339,30 +350,28 @@ namespace Photon
 		m_position.x = position_final_x;
 		m_position.y = position_final_y;
 		m_model = glm::translate(m_model, m_position);
-		
+
 		return true;
 	}
 
 	void Cube::LoadTexture(const std::string& file_path)
 	{
 		m_texture = new Texture(file_path.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+		m_shader = new Shader("basic.vert", "basic_texture.frag");
 		m_shader->Activate();
+		m_shader->SetUniformMat4("model", m_model);
+		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
+		m_shader->SetUniformVec4("ObjectColor", objectColor);
 		m_shader->SetInt("tex0", 0);
-		m_shader->SetUniformVec4("Color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-		m_texture->Unbind();
 	}
 
 	void Cube::LoadDefaultShader()
 	{
 		m_shader = new Shader("basic.vert", "basic.frag");
 		m_shader->Activate();
-		glm::vec4 color = glm::vec4(0, 0, 0, 0);
 		m_shader->SetUniformMat4("model", m_model);
-		//m_shader->SetUniformVec4("SolidColor", color);
-
-		glm::vec4 light_color = glm::vec4(1, 1, 1, 1);
-		//m_shader->SetUniformVec4("ReflectionColor", light_color);
-		m_shader->SetUniformVec4("lightColor", light_color);
+		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
+		m_shader->SetUniformVec4("ObjectColor", objectColor);
 	}
 
 	void Cube::LoadShader(Shader& shader)

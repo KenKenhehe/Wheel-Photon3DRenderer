@@ -7,13 +7,14 @@
 
 using namespace Photon;
 
-int main()
+int main(int argc, char* argv[])
 {
 	PhotonConfig config;
 	config.title = "test";
 	config.width = 1000;
 	config.height = 1000;
-	
+	config.current_app_path = argv[0];
+	std::cout << config.current_app_path << std::endl;
 	RenderScene rs;
 
 	PhotonApplication* app = new PhotonApplication(rs, config);

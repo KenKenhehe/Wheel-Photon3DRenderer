@@ -30,6 +30,7 @@ namespace Photon
 		int width;
 		int height;
 		const char* title;
+		std::string current_app_path;
 	};
 	
 	class PHOTON_API PhotonApplication
@@ -45,6 +46,7 @@ namespace Photon
 		GLFWwindow* GetWindow() { return m_current_window; }
 		PhotonConfig GetConfig() { return m_config; }
 		Camera* GetCamera() { return m_main_camera; }
+
 	private:
 		PhotonAppStatus m_current_status = PhotonAppStatus::STATUS_EMPTY;
 		std::vector<Camera*> m_cameras_in_scene;
@@ -54,5 +56,6 @@ namespace Photon
 
 		Light* m_current_light_source = nullptr;
 		PhotonConfig m_config;
+
 	};
 }

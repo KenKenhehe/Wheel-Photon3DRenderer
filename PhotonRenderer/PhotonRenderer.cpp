@@ -22,6 +22,7 @@ namespace Photon
 	PhotonApplication::PhotonApplication(Scene& mainScene, PhotonConfig config)
 	{
 		instance = this;
+		
 		//Initialize GLFW
 		glfwInit();
 
