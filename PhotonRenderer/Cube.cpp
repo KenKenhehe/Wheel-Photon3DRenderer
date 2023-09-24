@@ -74,7 +74,7 @@ namespace Photon
 		delete m_vbo;
 	}
 
-	void Cube::Draw(Camera* camera)
+	void Cube::Draw(FPSCamera* camera)
 	{
 		if (!m_init_success)
 		{

@@ -24,7 +24,7 @@ namespace Photon
 		return m_init_success;
 	}
 
-	void Photon::Entity::SetCamera(Camera* cam)
+	void Photon::Entity::SetCamera(FPSCamera* cam)
 	{
 		m_target_camera = cam;
 	}

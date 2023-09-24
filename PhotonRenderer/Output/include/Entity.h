@@ -30,10 +30,10 @@ namespace Photon
 			m_model = glm::rotate(m_model, glm::radians(angle), axis);
 		}
 
-		void virtual Draw(Camera* camera = nullptr) {};
+		void virtual Draw(FPSCamera* camera = nullptr) {};
 
-		void SetCamera(Camera* cam);
-		Camera* GetCamera() { return m_target_camera; }
+		void SetCamera(FPSCamera* cam);
+		FPSCamera* GetCamera() { return m_target_camera; }
 
 		void AddLightSource(Light* light_source);
 		Shader* GetShader() { return m_shader; };
@@ -59,7 +59,7 @@ namespace Photon
 		GLfloat* m_vertices_ptr = nullptr;
 		GLuint* m_indices_ptr = nullptr;
 
-		Camera* m_target_camera = nullptr;
+		FPSCamera* m_target_camera = nullptr;
 
 		Shader* m_shader = nullptr;
 

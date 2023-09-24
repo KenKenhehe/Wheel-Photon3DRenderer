@@ -22,7 +22,7 @@ namespace Photon
 
 		~Cube();
 	public:
-		void Draw(Camera* camera = nullptr) override;
+		void Draw(FPSCamera* camera = nullptr) override;
 		void Dispose() override;
 		void LoadTexture(const std::string& file_path);
 

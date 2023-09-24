@@ -7,7 +7,7 @@ namespace Photon {
 	public:
 		Point(glm::vec3 position);
 		Point(glm::vec2 position);
-		void Draw(Camera* cam = nullptr) override;
+		void Draw(FPSCamera* cam = nullptr) override;
 	private:
 		bool Init() override;
 

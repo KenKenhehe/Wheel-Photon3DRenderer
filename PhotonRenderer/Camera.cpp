@@ -4,7 +4,7 @@ Photon::PhotonApplication* Photon::PhotonApplication::instance;
 
 namespace Photon
 {
-	Camera::Camera(int width, int height, glm::vec3 position) :
+	FPSCamera::FPSCamera(int width, int height, glm::vec3 position) :
 		m_width(width), m_height(height), m_position(position)
 	{
 		Photon::PhotonApplication::instance->SetMainCamera(this);
@@ -19,7 +19,7 @@ namespace Photon
 		m_view_matrix = view;
 	}
 
-	void Camera::UpdateMatrix(float FOVdeg, float near_plane, float far_plane)
+	void FPSCamera::UpdateMatrix(float FOVdeg, float near_plane, float far_plane)
 	{
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
@@ -30,7 +30,7 @@ namespace Photon
 		m_view_matrix = view;
 	}
 
-	void Camera::Update()
+	void FPSCamera::Update()
 	{
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
@@ -42,46 +42,46 @@ namespace Photon
 		m_view_matrix = view;
 	}
 
-	void Camera::SetUniform(Shader& shader, const std::string& uniform)
+	void FPSCamera::SetUniform(Shader& shader, const std::string& uniform)
 	{
 		shader.SetUniformMat4(uniform, m_cam_matrix);
 		shader.SetUniformMat4("view", m_view_matrix);
 	}
 
-	void Camera::HandleInput()
+	void FPSCamera::HandleInput()
 	{
 		GLFWwindow* window = Photon::PhotonApplication::instance->GetWindow();
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		{
-			m_position += m_speed * m_rotation;
+			m_position += m_current_speed * m_rotation;
 		}
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		{
-			m_position += m_speed * -m_rotation;
+			m_position += m_current_speed * -m_rotation;
 		}
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 		{
-			m_position += m_speed * -glm::normalize(glm::cross(m_rotation, m_up));
+			m_position += m_current_speed * -glm::normalize(glm::cross(m_rotation, m_up));
 		}
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		{
-			m_position += m_speed * glm::normalize(glm::cross(m_rotation, m_up));
+			m_position += m_current_speed * glm::normalize(glm::cross(m_rotation, m_up));
 		}
 		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 		{
-			m_position += m_speed * m_up;
+			m_position += m_current_speed * m_up;
 		}
 		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
 		{
-			m_position += m_speed * -m_up;
+			m_position += m_current_speed * -m_up;
 		}
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 		{
-			m_speed = 0.1f;
+			m_current_speed = m_run_speed;
 		}
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
 		{
-			m_speed = 0.05f;
+			m_current_speed = m_walk_speed;
 		}
 
 		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
@@ -119,5 +119,11 @@ namespace Photon
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			m_first_clicked = true;
 		}
+	}
+	Camera::Camera()
+	{
+	}
+	void Camera::Update()
+	{
 	}
 }

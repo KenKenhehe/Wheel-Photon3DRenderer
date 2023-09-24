@@ -77,7 +77,7 @@ namespace Photon
 		}
 		mainScene.Dispose();
 	}
-	void PhotonApplication::SetMainCamera(Camera* cam)
+	void PhotonApplication::SetMainCamera(FPSCamera* cam)
 	{
 		if (m_main_camera == nullptr) 
 			m_main_camera = cam;

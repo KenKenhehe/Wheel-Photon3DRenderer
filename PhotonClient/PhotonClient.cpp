@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include "glm/glm.hpp"
 #include "photonRenderer.h"
 #include "RenderScene.h"
 

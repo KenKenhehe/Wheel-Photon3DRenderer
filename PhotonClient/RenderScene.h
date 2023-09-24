@@ -14,7 +14,7 @@ public:
 public:
 	//Photon::Line* m_line;
 	Photon::Point* m_point;
-	Photon::Camera* cam;
+	Photon::FPSCamera* cam;
 	Photon::Cube* test_obj;
 	Photon::Cube* light_cube;
 	Photon::Plane* plane;

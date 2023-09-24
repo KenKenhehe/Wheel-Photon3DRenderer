@@ -42,8 +42,9 @@ void RenderScene::OnCreate()
 	//m_point = new Photon::Point(glm::vec2(600, 400));
 
 	test_obj = new Photon::Cube(0.5f, 0.5f, 0.5f, glm::vec3(400.0f, 400.0f, 0.0f));
+	//TODO: change this to handle reletive path
 	test_obj->LoadTexture("D:\\_PhotonRenderer\\Photon3DRenderer\\x64\\Release\\resources\\brick.png");
-	cam = new Photon::Camera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
+	cam = new Photon::FPSCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
 	//light_shader = new Shader("light.vert", "light.frag");
 	plane = new Photon::Plane(4, 4, glm::vec3(400, 0, 0));
 

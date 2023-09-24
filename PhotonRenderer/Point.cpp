@@ -14,7 +14,7 @@ namespace Photon {
             LoadDefaultShader();
     }
 
-    void Point::Draw(Camera* cam)
+    void Point::Draw(FPSCamera* cam)
     {
         if (!m_init_success)
         {
