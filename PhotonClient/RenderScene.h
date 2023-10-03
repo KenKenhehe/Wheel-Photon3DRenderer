@@ -5,6 +5,7 @@
 #include "Line.h"
 #include "Point.h"
 #include "PointLight.h"
+#include "Model.h"
 class RenderScene : public Scene
 {
 public:
@@ -20,5 +21,7 @@ public:
 	Photon::Plane* plane;
 	Photon::PointLight* pl;
 	Shader* light_shader;
+	Photon::Model* test_model;
+	
 };
 

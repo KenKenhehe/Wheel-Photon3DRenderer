@@ -54,6 +54,7 @@ void RenderScene::OnCreate()
 	light_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));*/
 
 	pl = new Photon::PointLight(glm::vec3(600.0f, 500.0f, 0.0f), glm::vec4(1, 1, 1, 1));
+	test_model = new Photon::Model("D:\\_PhotonRenderer\\test_model\\Monkey\\Monkey.obj");
 }
 
 void RenderScene::Dispose()
