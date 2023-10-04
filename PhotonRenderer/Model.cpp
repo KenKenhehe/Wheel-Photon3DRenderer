@@ -1,17 +1,26 @@
 #include "Model.h"
 
 namespace Photon {
-	Model::Model(const std::string& path)
+	Model::Model(const std::string& path, glm::vec3 pos) : Entity(pos)
 	{
 		loadModel(path);
+		int global_width = PhotonApplication::instance->GetConfig().width;
+		int global_height = PhotonApplication::instance->GetConfig().height;
+
+		float position_final_x = map(m_position.x, 0, global_width, -1, 1);
+		float position_final_y = map(m_position.y, 0, global_height, -1, 1);
+		m_model = glm::translate(m_model, pos);
+		m_model = glm::scale(m_model, glm::vec3(1.0f, 1.0f, 1.0f));
 	}
 
-	void Photon::Model::Draw(Shader& shader)
+	void Photon::Model::Draw()
 	{
+		m_shader->SetUniformMat4("model", m_model);
 		for (int i = 0; i < m_meshes.size(); ++i)
 		{
-			m_meshes[i].Draw(shader);
+			m_meshes[i].Draw(*m_shader);
 		}
+		
 	}
 
 	void Photon::Model::loadModel(const std::string& path)
@@ -26,8 +35,8 @@ namespace Photon {
 			return;
 		}
 
-		// retrieve the directory path of the filepath for loading texture
-		directory = path.substr(0, path.find_last_of('/'));
+		// retrieve the m_directory path of the filepath for loading texture
+		m_directory = path.substr(0, path.find_last_of('/'));
 
 		processNode(scene->mRootNode, scene);
 	}
@@ -49,7 +58,7 @@ namespace Photon {
 	{
 		std::vector<Vertex> vertices;
 		std::vector<unsigned int> indices;
-		std::vector<Texture> textures;
+		std::vector<TextureData> textures;
 
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
@@ -94,18 +103,101 @@ namespace Photon {
 			vertices.push_back(vertex);
 		}
 
+		for (unsigned int i = 0; i < mesh->mNumFaces; i++) 
+		{
+			aiFace face = mesh->mFaces[i];
+			for (unsigned int j = 0; j < face.mNumIndices; j++) 
+			{
+				indices.push_back(face.mIndices[j]);
+			}
+		}
+
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+
+		std::vector<TextureData> diffuse_maps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		textures.insert(textures.end(), diffuse_maps.begin(), diffuse_maps.end());
+
+		std::vector<TextureData> specular_maps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		textures.insert(textures.end(), specular_maps.begin(), specular_maps.end());
+
+		std::vector<TextureData> normal_maps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		textures.insert(textures.end(), normal_maps.begin(), normal_maps.end());
+
+		std::vector<TextureData> height_maps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		textures.insert(textures.end(), height_maps.begin(), height_maps.end());
+
 		return Mesh(vertices, indices, textures);
 	}
-	unsigned int Model::LoadTextureFromFile(const char* path, const std::string& directory, bool gamma)
+	unsigned int Model::LoadTextureFromFile(const char* path, const std::string& m_directory)
 	{
 		std::string filename = std::string(path);
-		filename = directory + '/' + filename;
+		filename = m_directory + '/' + filename;
 
 		unsigned int textureID;
 		glGenTextures(1, &textureID);
 
-		int width, height, nrComponents;
+		//define width, height and color channel for the texture, and load the texture
+		int widthImg, heightImg, numofColorChannel;
+		//Flip the image vertically when loaded
+		stbi_set_flip_vertically_on_load(true);
+		unsigned char* data = stbi_load(filename.c_str(), &widthImg, &heightImg, &numofColorChannel, 0);
 
-		return 0;
+		if (data) 
+		{
+			GLenum format = GL_RGBA;
+			if (numofColorChannel == 1)
+				format = GL_RED;
+			else if (numofColorChannel == 3)
+				format = GL_RGB;
+			else if (numofColorChannel == 4)
+				format = GL_RGBA;
+
+			glBindTexture(GL_TEXTURE_2D, textureID);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, widthImg, heightImg, 0, format, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			stbi_image_free(data);
+		}
+		else
+		{
+			std::cout << "Load texture: " << filename << " failed.\n";
+		}
+
+		return textureID;
+	}
+	std::vector<TextureData> Model::LoadMaterialTextures(aiMaterial* material, aiTextureType type, std::string type_name)
+	{
+		std::vector<TextureData> textures;
+		for (unsigned int i = 0; i < material->GetTextureCount(type); i++)
+		{
+			aiString str;
+			material->GetTexture(type, i, &str);
+			// check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
+			bool skip = false;
+			for (unsigned int j = 0; j < m_texture_loaded.size(); j++)
+			{
+				if (std::strcmp(m_texture_loaded[j].path.data(), str.C_Str()) == 0)
+				{
+					textures.push_back(m_texture_loaded[j]);
+					skip = true; // a texture with the same filepath has already been loaded, continue to next one. (optimization)
+					break;
+				}
+			}
+			if (!skip)
+			{   // if texture hasn't been loaded already, load it
+				TextureData texture;
+				texture.id = LoadTextureFromFile(str.C_Str(), m_directory);
+				texture.type = type_name;
+				texture.path = str.C_Str();
+				textures.push_back(texture);
+				m_texture_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
+			}
+		}
+		return textures;
 	}
 }

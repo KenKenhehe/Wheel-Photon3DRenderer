@@ -1077,7 +1077,7 @@ typedef void (* GLFWcharmodsfun)(GLFWwindow*,unsigned int,int);
  *
  *  @param[in] window The window that received the event.
  *  @param[in] count The number of dropped files.
- *  @param[in] paths The UTF-8 encoded file and/or directory path names.
+ *  @param[in] paths The UTF-8 encoded file and/or m_directory path names.
  *
  *  @sa @ref path_drop
  *  @sa glfwSetDropCallback
@@ -1226,7 +1226,7 @@ typedef struct GLFWimage
  *
  *  @errors Possible errors include @ref GLFW_PLATFORM_ERROR.
  *
- *  @remark @osx This function will change the current directory of the
+ *  @remark @osx This function will change the current m_directory of the
  *  application to the `Contents/Resources` subdirectory of the application's
  *  bundle, if present.  This can be disabled with a
  *  [compile-time option](@ref compile_options_osx).

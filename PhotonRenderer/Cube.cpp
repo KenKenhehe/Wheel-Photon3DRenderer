@@ -27,7 +27,6 @@ namespace Photon
 	}
 
 
-
 	Cube::Cube(float width, float height, float depth, glm::vec3 position) :
 		Entity(position),
 		m_scale(glm::vec3(width, height, depth))
@@ -362,7 +361,7 @@ namespace Photon
 		m_shader->SetUniformMat4("model", m_model);
 		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
 		m_shader->SetUniformVec4("ObjectColor", objectColor);
-		m_shader->SetInt("tex0", 0);
+		m_shader->SetInt("tex0", 0); 
 	}
 
 	void Cube::LoadDefaultShader()

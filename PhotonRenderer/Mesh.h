@@ -23,10 +23,11 @@ namespace Photon {
 		float weights[MAX_BONE_INFLUENCE];
 	};
 
-	struct Texture
+	struct TextureData
 	{
 		unsigned int id;
 		std::string type;
+		std::string path;
 	};
 
 	class Mesh
@@ -34,14 +35,14 @@ namespace Photon {
 	public:
 		Mesh(std::vector<Vertex> vertices,
 			std::vector<unsigned int> indices,
-			std::vector<Texture> textures);
+			std::vector<TextureData> textures);
 
 		void Draw(Shader& shader);
 
 	private:
 		std::vector<Vertex> m_vertices;
 		std::vector<GLuint> m_indices;
-		std::vector<Texture> m_textures;
+		std::vector<TextureData> m_textures;
 
 		VertexBuffer* m_vbo = nullptr;
 		IndexBuffer* m_ibo = nullptr;

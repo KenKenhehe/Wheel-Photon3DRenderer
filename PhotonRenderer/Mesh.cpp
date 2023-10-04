@@ -3,14 +3,13 @@
 namespace Photon {
     Mesh::Mesh(std::vector<Vertex> vertices, 
         std::vector<unsigned int> indices, 
-        std::vector<Texture> textures)
+        std::vector<TextureData> textures)
     {
         this->m_vertices = vertices;
         this->m_indices = indices;
         this->m_textures = textures;
 
         SetupMesh();
-
     }
 
     void Mesh::Draw(Shader& shader)
@@ -29,9 +28,9 @@ namespace Photon {
             else if (name == "texture_specular")
                 number = std::to_string(specularNr++);
             else if (name == "texture_normal")
-                number = std::to_string(specularNr++);
+                number = std::to_string(normalNr++);
             else if (name == "texture_height")
-                number = std::to_string(specularNr++);
+                number = std::to_string(heightNr++);
             shader.SetInt((name + number), i);
         }
 
@@ -57,6 +56,8 @@ namespace Photon {
         m_vao->LinkAttrib(*m_vbo, 4, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, bitangent));
         m_vao->LinkAttrib(*m_vbo, 5, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, bone_ids));
         m_vao->LinkAttrib(*m_vbo, 6, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, weights));
+
+        m_vao->Unbind();
 
         /* glBindVertexArray(VAO);
          glBindBuffer(GL_ARRAY_BUFFER, VBO);

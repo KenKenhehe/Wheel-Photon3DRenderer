@@ -127,7 +127,7 @@
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)PhotonRenderer\*.h $(ProjectDir)Output\include
-copy $(ProjectDir)Output\Lib\PhotonRenderer.dll $(SolutionDir)\x64\Debug</Command>
+copy $(ProjectDir)Output\Lib\PhotonRenderer.dll $(SolutionDir)x64\Debug</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
