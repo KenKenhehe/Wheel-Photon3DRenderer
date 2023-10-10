@@ -16,11 +16,11 @@ namespace Photon {
 		glm::vec3 position;
 		glm::vec3 normal;
 		glm::vec2 tex_coord;
-		glm::vec3 tangent;
+	/*	glm::vec3 tangent;
 		glm::vec3 bitangent;
 
 		int bone_ids[MAX_BONE_INFLUENCE];
-		float weights[MAX_BONE_INFLUENCE];
+		float weights[MAX_BONE_INFLUENCE];*/
 	};
 
 	struct TextureData
@@ -48,6 +48,7 @@ namespace Photon {
 		IndexBuffer* m_ibo = nullptr;
 		VertexArray* m_vao = nullptr;
 
+		Shader* m_shader = nullptr;
 
 	private:
 		void SetupMesh();

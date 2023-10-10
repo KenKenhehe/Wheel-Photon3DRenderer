@@ -6,13 +6,15 @@ void RenderScene::Render()
 	cam->UpdateMatrix(45.0f, 0.1f, 100.0f);
 	cam->Update();
 
-	test_obj->Draw();
-	pl->ApplyLighting(test_obj);
+	/*test_obj->Draw();
+	pl->ApplyLighting(test_obj);*/
 	//light_cube->Draw();
 
 	plane->Draw();
 	pl->ApplyLighting(plane);
+
 	test_model->Draw();
+	pl->ApplyLighting(test_model);
 	//pl->Translate(glm::vec3(-0.01f, 0, 0));
 
 	//m_point->Draw();
@@ -55,7 +57,7 @@ void RenderScene::OnCreate()
 	light_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));*/
 
 	pl = new Photon::PointLight(glm::vec3(600.0f, 500.0f, 0.0f), glm::vec4(1, 1, 1, 1));
-	test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(400.0f, 400.0f, 0.0f));
+	test_model = new Photon::Model("D:\\_PhotonRenderer\\test_model\\Monkey\\Monkey.obj", glm::vec3(400.0f, 400.0f, 0.0f));
 }
 
 void RenderScene::Dispose()

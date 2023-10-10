@@ -4,6 +4,8 @@ namespace Photon {
 	Model::Model(const std::string& path, glm::vec3 pos) : Entity(pos)
 	{
 		loadModel(path);
+		m_shader = new Shader("basic_model.vert", "basic_model.frag");
+		m_shader->Activate();
 		int global_width = PhotonApplication::instance->GetConfig().width;
 		int global_height = PhotonApplication::instance->GetConfig().height;
 
@@ -11,10 +13,14 @@ namespace Photon {
 		float position_final_y = map(m_position.y, 0, global_height, -1, 1);
 		m_model = glm::translate(m_model, pos);
 		m_model = glm::scale(m_model, glm::vec3(1.0f, 1.0f, 1.0f));
+
+		m_shader->SetUniformMat4("model", m_model);
+		m_shader->SetUniform4f("Color", 1, 1, 1, 1);
 	}
 
 	void Photon::Model::Draw()
 	{
+		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 		for (int i = 0; i < m_meshes.size(); ++i)
 		{
@@ -26,8 +32,8 @@ namespace Photon {
 	void Photon::Model::loadModel(const std::string& path)
 	{
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
-
+		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+		std::cout << "Scene mesh num:  " << scene->mNumMeshes << std::endl;
 		// check for errors
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 		{
@@ -36,23 +42,26 @@ namespace Photon {
 		}
 
 		// retrieve the m_directory path of the filepath for loading texture
-		m_directory = path.substr(0, path.find_last_of('/'));
+		m_directory = path.substr(0, path.find_last_of('\\'));
 
-		processNode(scene->mRootNode, scene);
+		processScene(scene);
 	}
-	void Model::processNode(aiNode* node, const aiScene* scene)
+	void Model::processScene(const aiScene* scene)
 	{
+		std::cout << scene->mNumMeshes << std::endl;
+
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++) 
 		{
-			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+			aiMesh* mesh = scene->mMeshes[i];
+			std::cout << "Processing mesh: " << mesh->mName.C_Str() << std::endl;
 			m_meshes.emplace_back(processMesh(mesh, scene));
 		}
 
-		// after we've processed all of the meshes (if any) we then recursively process each of the children nodes
-		for (unsigned int i = 0; i < node->mNumChildren; i++)
-		{
-			processNode(node->mChildren[i], scene);
-		}
+		//// after we've processed all of the meshes (if any) we then recursively process each of the children nodes
+		//for (unsigned int i = 0; i < node->mNumChildren; i++)
+		//{
+		//	processNode(node->mChildren[i], scene);
+		//}
 	}
 	Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	{
@@ -86,16 +95,17 @@ namespace Photon {
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
 				vertex.tex_coord = vec;
-				// tangent
-				vector.x = mesh->mTangents[i].x;
-				vector.y = mesh->mTangents[i].y;
-				vector.z = mesh->mTangents[i].z;
-				vertex.tangent = vector;
-				// bitangent
-				vector.x = mesh->mBitangents[i].x;
-				vector.y = mesh->mBitangents[i].y;
-				vector.z = mesh->mBitangents[i].z;
-				vertex.bitangent = vector;
+
+				//// tangent
+				//vector.x = mesh->mTangents[i].x;
+				//vector.y = mesh->mTangents[i].y;
+				//vector.z = mesh->mTangents[i].z;
+				//vertex.tangent = vector;
+				//// bitangent
+				//vector.x = mesh->mBitangents[i].x;
+				//vector.y = mesh->mBitangents[i].y;
+				//vector.z = mesh->mBitangents[i].z;
+				//vertex.bitangent = vector;
 			}
 			else
 				vertex.tex_coord = glm::vec2(0.0f, 0.0f);

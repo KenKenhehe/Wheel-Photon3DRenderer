@@ -22,7 +22,7 @@ namespace Photon {
 		std::string m_directory;
 	private:
 		void loadModel(const std::string& path);
-		void processNode(aiNode* node, const aiScene* scene);
+		void processScene(const aiScene* scene);
 		Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 
 		unsigned int LoadTextureFromFile(const char* path, const std::string& m_directory);
