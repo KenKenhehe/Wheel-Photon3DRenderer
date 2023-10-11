@@ -38,6 +38,7 @@ namespace Photon {
 			std::vector<TextureData> textures);
 
 		void Draw(Shader& shader);
+		Shader* m_shader = nullptr;
 
 	private:
 		std::vector<Vertex> m_vertices;
@@ -48,7 +49,7 @@ namespace Photon {
 		IndexBuffer* m_ibo = nullptr;
 		VertexArray* m_vao = nullptr;
 
-		Shader* m_shader = nullptr;
+		
 
 	private:
 		void SetupMesh();

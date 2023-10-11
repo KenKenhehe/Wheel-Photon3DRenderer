@@ -3,17 +3,20 @@
 namespace Photon {
 	Model::Model(const std::string& path, glm::vec3 pos) : Entity(pos)
 	{
+		Init();
 		loadModel(path);
-		m_shader = new Shader("basic_model.vert", "basic_model.frag");
-		m_shader->Activate();
 		int global_width = PhotonApplication::instance->GetConfig().width;
 		int global_height = PhotonApplication::instance->GetConfig().height;
 
 		float position_final_x = map(m_position.x, 0, global_width, -1, 1);
 		float position_final_y = map(m_position.y, 0, global_height, -1, 1);
-		m_model = glm::translate(m_model, pos);
-		m_model = glm::scale(m_model, glm::vec3(1.0f, 1.0f, 1.0f));
+		m_position.x = position_final_x;
+		m_position.y = position_final_y;
+		m_model = glm::translate(m_model, m_position);
+		//m_model = glm::scale(m_model, glm::vec3(1.0f, 1.0f, 1.0f));
 
+		m_shader = new Shader("basic_model.vert", "basic_model.frag");
+		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 		m_shader->SetUniform4f("Color", 1, 1, 1, 1);
 	}
@@ -21,12 +24,16 @@ namespace Photon {
 	void Photon::Model::Draw()
 	{
 		m_shader->Activate();
+		
+		if (m_target_camera != nullptr)
+		{
+			m_target_camera->SetUniform(*m_shader, "camMatrix");
+		}
 		m_shader->SetUniformMat4("model", m_model);
 		for (int i = 0; i < m_meshes.size(); ++i)
 		{
 			m_meshes[i].Draw(*m_shader);
 		}
-		
 	}
 
 	void Photon::Model::loadModel(const std::string& path)
@@ -69,7 +76,7 @@ namespace Photon {
 		std::vector<unsigned int> indices;
 		std::vector<TextureData> textures;
 
-		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
+		for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 		{
 			Vertex vertex;
 			glm::vec3 vector; 
@@ -122,7 +129,7 @@ namespace Photon {
 			}
 		}
 
-		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		/*aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
 		std::vector<TextureData> diffuse_maps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuse_maps.begin(), diffuse_maps.end());
@@ -134,8 +141,9 @@ namespace Photon {
 		textures.insert(textures.end(), normal_maps.begin(), normal_maps.end());
 
 		std::vector<TextureData> height_maps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-		textures.insert(textures.end(), height_maps.begin(), height_maps.end());
-
+		textures.insert(textures.end(), height_maps.begin(), height_maps.end());*/
+		std::cout << "Vertices size: " << vertices.size() << std::endl;
+		std::cout << "Indices size: " << indices.size() << std::endl;
 		return Mesh(vertices, indices, textures);
 	}
 	unsigned int Model::LoadTextureFromFile(const char* path, const std::string& m_directory)

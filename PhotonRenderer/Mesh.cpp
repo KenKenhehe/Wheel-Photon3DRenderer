@@ -46,8 +46,10 @@ namespace Photon {
         m_vao = new VertexArray();
         m_vao->Bind();
 
-        m_vbo = new VertexBuffer((GLfloat*)&m_vertices[0], m_vertices.size() * sizeof(Vertex));
+        m_vbo = new VertexBuffer(&m_vertices[0], m_vertices.size() * sizeof(Vertex));
         m_ibo = new IndexBuffer(&m_indices[0], sizeof(GLuint) * m_indices.size());
+
+        std::cout << "Size of Vertex: " << sizeof(Vertex) << std::endl;
 
         m_vao->LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
         m_vao->LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, normal));
