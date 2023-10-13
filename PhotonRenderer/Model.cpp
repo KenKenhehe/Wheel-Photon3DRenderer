@@ -5,6 +5,8 @@ namespace Photon {
 	{
 		Init();
 		loadModel(path);
+
+		m_model = glm::mat4(1.0);
 		int global_width = PhotonApplication::instance->GetConfig().width;
 		int global_height = PhotonApplication::instance->GetConfig().height;
 
@@ -12,13 +14,14 @@ namespace Photon {
 		float position_final_y = map(m_position.y, 0, global_height, -1, 1);
 		m_position.x = position_final_x;
 		m_position.y = position_final_y;
+		m_model = glm::scale(glm::vec3(0.5f, 0.5f, 0.5f));
 		m_model = glm::translate(m_model, m_position);
 		//m_model = glm::scale(m_model, glm::vec3(1.0f, 1.0f, 1.0f));
 
-		m_shader = new Shader("basic_model.vert", "basic_model.frag");
+		m_shader = new Shader("basic_model.vert", "basic_model_lighting_re.frag");
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
-		m_shader->SetUniform4f("Color", 1, 1, 1, 1);
+		m_shader->SetUniform4f("objectColor", 0.8f, 0.8f, 0.8f, 1);
 	}
 
 	void Photon::Model::Draw()

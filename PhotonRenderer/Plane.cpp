@@ -47,11 +47,11 @@ namespace Photon
 
 		// Vertices coordinates
 		m_vertex_data_list =
-		{ //     COORDINATES                     /        COLORS    /    TexCoord    /       NORMALS     //
-			-(m_width / 2), 0.0f,  (m_height / 2),	0.0f, 0.0f, 0.0f,	0.0f, 0.0f,	  0.0f, 1.0f, 0.0f,
-			-(m_width / 2), 0.0f, -(m_height / 2),	0.0f, 0.0f, 0.0f,	0.0f, 1.0f,	  0.0f, 1.0f, 0.0f,
-			 (m_width / 2), 0.0f, -(m_height / 2),	0.0f, 0.0f, 0.0f,	1.0f, 1.0f,	  0.0f, 1.0f, 0.0f,
-			 (m_width / 2), 0.0f,  (m_height / 2),	0.0f, 0.0f, 0.0f,	1.0f, 0.0f,	  0.0f, 1.0f, 0.0f
+		{ //     COORDINATES                     /   TexCoord    /       NORMALS     //
+			-(m_width / 2), 0.0f,  (m_height / 2),	0.0f, 0.0f,	  0.0f, 1.0f, 0.0f,
+			-(m_width / 2), 0.0f, -(m_height / 2),	0.0f, 1.0f,	  0.0f, 1.0f, 0.0f,
+			 (m_width / 2), 0.0f, -(m_height / 2),	1.0f, 1.0f,	  0.0f, 1.0f, 0.0f,
+			 (m_width / 2), 0.0f,  (m_height / 2),	1.0f, 0.0f,	  0.0f, 1.0f, 0.0f
 		};
 
 		// Indices for vertices order
@@ -72,10 +72,9 @@ namespace Photon
 		m_vbo = new VertexBuffer(m_vertices_ptr, sizeof(GLfloat) * m_vertex_data_list.size());
 		m_ibo = new IndexBuffer(m_indices_ptr, sizeof(GLuint) * m_indices_list.size());
 
-		m_vao->LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		m_vao->LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		m_vao->LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		m_vao->LinkAttrib(*m_vbo, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		m_vao->LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+		m_vao->LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+		m_vao->LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(2 * sizeof(float)));
 
 		m_vao->Unbind();
 		m_vbo->Unbind();
@@ -94,12 +93,12 @@ namespace Photon
 
 	void Plane::LoadDefaultShader()
 	{
-		m_shader = new Shader("basic.vert", "basic.frag");
+		m_shader = new Shader("basic_model.vert", "basic_model_lighting_re.frag");
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 
 		glm::vec4 objectColor = glm::vec4(1, 0, 0, 1);
-		m_shader->SetUniformVec4("ObjectColor", objectColor);
+		m_shader->SetUniformVec4("objectColor", objectColor);
 
 	}
 	void Plane::LoadShader(Shader& shader)

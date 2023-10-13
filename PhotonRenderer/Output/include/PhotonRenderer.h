@@ -11,7 +11,7 @@
 
 #include "Core.h"
 #include "Scene.h"
-
+#include "InputManager.h"
 
 namespace Photon
 {
@@ -46,6 +46,8 @@ namespace Photon
 		GLFWwindow* GetWindow() { return m_current_window; }
 		PhotonConfig GetConfig() { return m_config; }
 		FPSCamera* GetCamera() { return m_main_camera; }
+		InputManager* GetInputManager() { return m_input_manager; }
+		float GetDeltaTime() { return m_current_delta_time; }
 
 	private:
 		PhotonAppStatus m_current_status = PhotonAppStatus::STATUS_EMPTY;
@@ -56,6 +58,8 @@ namespace Photon
 
 		Light* m_current_light_source = nullptr;
 		PhotonConfig m_config;
+		InputManager* m_input_manager = nullptr;
 
+		float m_current_delta_time = 0;
 	};
 }

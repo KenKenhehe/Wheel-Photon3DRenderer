@@ -15,7 +15,7 @@ uniform vec3 camPos;
 
 void main()
 {
-   float ambient_intensity = 0.2;
+   float ambient_intensity = 0.4;
    vec3 normal = normalize(vert_out_normal);
    
    vec3 lightDirection = normalize(vert_out_light_pos - vert_out_frag_pos);

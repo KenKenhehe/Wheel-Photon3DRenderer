@@ -46,6 +46,10 @@ namespace Photon
 		mainScene.SetWidth(config.width);
 		mainScene.SetHeight(config.height);
 
+		m_input_manager = new InputManager(window);
+
+		mainScene.SetInputManager(m_input_manager);
+
 		m_config = config;
 
 		glfwMakeContextCurrent(window);
@@ -69,13 +73,21 @@ namespace Photon
 		glEnable(GL_DEPTH_TEST);
 		while (!glfwWindowShouldClose(window))
 		{
+			float start_time = glfwGetTime();
 			glClearColor(.2f, .3f, .3f, 1);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			mainScene.Render();
 			glfwSwapBuffers(window);
 			glfwPollEvents();
+
+			//get delta time
+			m_current_delta_time = glfwGetTime() - start_time;
+			float current_fps = 1 / m_current_delta_time;
+			glfwSetWindowTitle(window, std::to_string((int)current_fps).c_str());
 		}
 		mainScene.Dispose();
+
+		delete m_input_manager;
 	}
 	void PhotonApplication::SetMainCamera(FPSCamera* cam)
 	{

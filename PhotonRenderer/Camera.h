@@ -14,7 +14,7 @@ namespace Photon
 	{
 	public:
 		Camera();
-		virtual void Update() = 0;
+		virtual void Update() = 0;  
 		virtual void HandleInput() = 0;
 
 	private:

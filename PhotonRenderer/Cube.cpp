@@ -127,176 +127,168 @@ namespace Photon
 		{
 			//					Coordinate					//
 			-(m_scale.x / 2), -(m_scale.y / 2),   m_scale.z / 2,  // front bottom left 0
-			 //Color
-			  1,1,1,
+			 
 			  //text coord
 			  0,0,
 			  //normal
 			  0, 0, 1,
 
 			  m_scale.x / 2, -(m_scale.y / 2), m_scale.z / 2, // front bottom right 1
-			  //Color
-			  1,1,1,
+
 			  //TODO: text coord
 			  1,0,
 			  //TODO: normal
 			  0, 0, 1,
 
 			  -(m_scale.x / 2),  m_scale.y / 2, m_scale.z / 2, // front up left 2
-			  //TODO: Color
-			  1,1,1,
+	
 			  //TODO: text coord
 			  0,1,
 			  //TODO: normal
 			  0, 0, 1,
 
 			  m_scale.x / 2,  m_scale.y / 2,   m_scale.z / 2,  // front up right 3
-			  //Color
-			  1,1,1,
+
 			  //text coord
 			  1,1,
 			  //normal
 			  0, 0, 1,
 
 			-(m_scale.x / 2),   m_scale.y / 2,    -(m_scale.z / 2),  // back up left 4
-			  //Color
-			  1,1,1,
+			 
 			  //text coord
 			  0,1,
 			  //normal
 			  0, 0, -1,
 
 			  m_scale.x / 2,   m_scale.y / 2,  -(m_scale.z / 2), // back up right 5
-			  //Color
-			  1,1,1,
+			  
 			  //text coord
 			  1,1,
 			  //normal
 			  0, 0, -1,
 
 			  m_scale.x / 2,    -(m_scale.y / 2),  -(m_scale.z / 2), // back bottom right 6
-			  //Color
-			  1,1,1,
+			  
 			  //text coord
 			  1,0,
 			  //normal
 			  0, 0, -1,
 
 			  -(m_scale.x / 2),    -(m_scale.y / 2),    -(m_scale.z / 2),  // back bottom left 7
-			  //Color
-			  1,1,1,
+			  
 			  //text coord
 			  0,0,
 			  //normal
 			  0, 0, -1,
 
 			  -(m_scale.x / 2), m_scale.y / 2, m_scale.z / 2, //left front up  8
-			  1,1,1,
+			  
 			  //Texture:
 			  1,1,
 			  //Normal:
 			  -1, 0, 0,
 
 			  -(m_scale.x / 2), -(m_scale.y / 2), m_scale.z / 2, //left front down 9
-			  1,1,1,
+			  
 			  //Texture:
 			  1,0,
 			  //Normal:
 			 -1, 0, 0,
 
 			-(m_scale.x / 2), m_scale.y / 2, -(m_scale.z / 2), //left back up 10
-			  1,1,1,
+			  
 			  //Texture:
 			  0,1,
 			  //Normal:
 			  -1, 0, 0,
 
 			-(m_scale.x / 2), -(m_scale.y / 2), -(m_scale.z / 2), //left back down 11
-			  1,1,1,
+			  
 			  //Texture:
 			  0,0,
 			  //Normal:
 			 -1, 0, 0,
 
 			  m_scale.x / 2, m_scale.y / 2, m_scale.z / 2, //right front up  12
-			  1,1,1,
+			  
 			  //Texture:
 			  0,1,
 			  //Normal:
 			  1, 0, 0,
 
 			  m_scale.x / 2, -(m_scale.y / 2), m_scale.z / 2, //right front down 13
-			  1,1,1,
+			  
 			  //Texture:
 			  0,0,
 			  //Normal:
 			  1, 0, 0,
 
 			  m_scale.x / 2, m_scale.y / 2, -(m_scale.z / 2), //right back up 14
-			  1,1,1,
+			  
 			  //Texture:
 			  1,1,
 			  //Normal:
 			  1, 0, 0,
 
 			  m_scale.x / 2, -(m_scale.y / 2), -(m_scale.z / 2), //right back down 15
-			  1,1,1,
+			  
 			  //Texture:
 			  1,0,
 			  //Normal:
 			  1, 0, 0,
 
 			  -(m_scale.x / 2), m_scale.y / 2, m_scale.z / 2, //up left front 16
-			  1,1,1,
+			  
 			  //Texture:
 			  0,0,
 			  //Normal:
 			  0, 1, 0,
 
 			  m_scale.x / 2, m_scale.y / 2, m_scale.z / 2, //up right front 17
-			  1, 1, 1,
+			  
 			  //Texture:
 			  1, 0,
 			  //Normal:
 			  0, 1, 0,
 
 			  -(m_scale.x / 2), m_scale.y / 2, -(m_scale.z / 2), //up left back 18
-			  1,1,1,
+			  
 			  //Texture:
 			  0,1,
 			  //Normal:
 			  0, 1, 0,
 
 			  m_scale.x / 2, m_scale.y / 2, -(m_scale.z / 2), //up right back 19
-			  1,1,1,
+			  
 			  //Texture:
 			  1,1,
 			  //Normal:
 			  0, 1, 0,
 
 			  -(m_scale.x / 2), -(m_scale.y / 2), m_scale.z / 2, //bottom left front 20
-			  1, 1, 1,
+			  
 			  //Texture:
 			  0, 1,
 			  //Normal:
 			  0, -1, 0,
 
 			  m_scale.x / 2, -(m_scale.y / 2), m_scale.z / 2, //bottom right front 21
-			  1, 1, 1,
+			  
 			  //Texture:
 			  1, 1,
 			  //Normal:
 			  0, -1, 0,
 
 			  -(m_scale.x / 2), -(m_scale.y / 2), -(m_scale.z / 2), //bottom left back 22
-			  1, 1, 1,
+			  
 			  //Texture:
 			  0, 0,
 			  //Normal:
 			  0, -1, 0,
 
 			  m_scale.x / 2, -(m_scale.y / 2), -(m_scale.z / 2), //bottom right back 23
-			  1, 1, 1,
+			  
 			  //Texture:
 			  1, 0,
 			  //Normal:
@@ -330,10 +322,10 @@ namespace Photon
 		m_vbo = new VertexBuffer(m_vertices_ptr, sizeof(GLfloat) * m_vertex_data_list.size());
 		m_ibo = new IndexBuffer(m_indices_ptr, sizeof(GLuint) * m_indices_list.size());
 
-		m_vao->LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-		m_vao->LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-		m_vao->LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-		m_vao->LinkAttrib(*m_vbo, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+		m_vao->LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+		m_vao->LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+		m_vao->LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(2 * sizeof(float)));
+		/*m_vao->LinkAttrib(*m_vbo, 3, 3, GL_FLOAT, 8 * sizeof(float), (void*)(8 * sizeof(float)));*/
 
 		m_vao->Unbind();
 		m_vbo->Unbind();
@@ -360,22 +352,22 @@ namespace Photon
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
-		m_shader->SetUniformVec4("ObjectColor", objectColor);
+		m_shader->SetUniformVec4("objectColor", objectColor);
 		m_shader->SetInt("tex0", 0); 
 	}
 
 	void Cube::LoadDefaultShader()
 	{
-		m_shader = new Shader("basic.vert", "basic.frag");
+		m_shader = new Shader("basic_model.vert", "basic_model_lighting_re.frag");
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
-		m_shader->SetUniformVec4("ObjectColor", objectColor);
+		m_shader->SetUniformVec4("objectColor", objectColor);
 	}
 
-	void Cube::LoadShader(Shader& shader)
+	void Cube::LoadShader(Shader* shader)
 	{
-		m_shader = &shader;
+		m_shader = shader;
 		m_shader->Activate();
 	}
 }

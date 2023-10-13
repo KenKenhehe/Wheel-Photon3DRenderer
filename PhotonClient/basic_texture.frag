@@ -16,7 +16,7 @@ uniform vec3 camPos;
 void main()
 {
    //ambient
-   float ambient_intensity = 0.2;
+   float ambient_intensity = 0.7;
    vec3 ambient = ambient_intensity * lightColor.xyz;
 
    //diffuse

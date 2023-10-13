@@ -1,9 +1,16 @@
 #include "PointLight.h"
 
-Photon::PointLight::PointLight(glm::vec3 position, glm::vec4 light_color) : 
-	Light(position), m_light_color(light_color)
+Photon::PointLight::PointLight(glm::vec3 position, glm::vec4 light_color, bool visual) : 
+	Light(position), m_light_color(light_color), m_enable_visual(visual)
 {
-	
+	if (visual) 
+	{
+		light_visual_cube = new Cube(glm::vec3(0.1, 0.1, 0.1), position);
+		Shader* light_shader = new Shader("light.vert", "light.frag");
+		light_visual_cube->LoadShader(light_shader);
+		light_visual_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
+
+	}
 }
 
 void Photon::PointLight::ApplyLighting(Entity* entity)
@@ -11,8 +18,12 @@ void Photon::PointLight::ApplyLighting(Entity* entity)
 	entity->GetShader()->Activate();
 	entity->GetShader()->SetUniformVec3("lightPosition", m_position);
 	entity->GetShader()->SetUniformVec4("lightColor", m_light_color);
-	//entity->GetShader()->SetUniformVec4("ReflectionColor", m_reflection_color);
 	glm::vec3 camera_pos = entity->GetCamera() == nullptr ? glm::vec3(0, 0, 0) : entity->GetCamera()->Position();
-	//std::cout << camera_pos.x << ", " << camera_pos.y << ", " << camera_pos.z << std::endl;
 	entity->GetShader()->SetUniformVec3("camPos", camera_pos);
+}
+
+void Photon::PointLight::show()
+{
+	light_visual_cube->Draw();
+	light_visual_cube->SetPosition(m_position);
 }

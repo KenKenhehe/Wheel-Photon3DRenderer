@@ -27,7 +27,7 @@ namespace Photon
 		void LoadTexture(const std::string& file_path);
 
 		void LoadDefaultShader();
-		void LoadShader(Shader& shader);
+		void LoadShader(Shader* shader);
 		glm::vec3 GetPosition() { return m_position; }
 
 	private:

@@ -25,6 +25,12 @@ namespace Photon
 			m_position += translation;
 		}
 
+		void SetPosition(glm::vec3 pos) {
+			m_position = pos;
+			glm::mat4 identity = glm::mat4(1.0);
+			m_model = glm::translate(identity, pos);
+		}
+
 		void Rotate(float angle, glm::vec3 axis)
 		{
 			m_model = glm::rotate(m_model, glm::radians(angle), axis);
