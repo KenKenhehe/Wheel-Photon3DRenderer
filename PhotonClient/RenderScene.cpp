@@ -9,8 +9,8 @@ namespace Photon
 		cam->UpdateMatrix(45.0f, 0.1f, 100.0f);
 		cam->Update();
 
-		test_obj->Draw();
-		pl->ApplyLighting(test_obj);
+		/*test_obj->Draw();
+		pl->ApplyLighting(test_obj);*/
 		//light_cube->Draw();
 
 		plane->Draw();
@@ -20,23 +20,29 @@ namespace Photon
 		pl->ApplyLighting(test_model);
 
 		pl->show();
-		//GetCurrentWindow();
-		if (GetInputManager()->GetKey(KeyCode::Up, KeyAction::Pressed)) {
+
+		if (GetInputManager()->GetKey(KeyCode::Up, KeyAction::Pressed)) 
+		{
 			pl->Translate(glm::vec3(0, 0, -0.05f));
 		}
-		if (GetInputManager()->GetKey(KeyCode::Down, KeyAction::Pressed)) {
+		if (GetInputManager()->GetKey(KeyCode::Down, KeyAction::Pressed)) 
+		{
 			pl->Translate(glm::vec3(0, 0, 0.05f));
 		}
-		if (GetInputManager()->GetKey(KeyCode::Left, KeyAction::Pressed)) {
+		if (GetInputManager()->GetKey(KeyCode::Left, KeyAction::Pressed)) 
+		{
 			pl->Translate(glm::vec3(-0.05f, 0, 0));
 		}
-		if (GetInputManager()->GetKey(KeyCode::Right, KeyAction::Pressed)) {
+		if (GetInputManager()->GetKey(KeyCode::Right, KeyAction::Pressed)) 
+		{
 			pl->Translate(glm::vec3(0.05f, 0, 0));
 		}
-		if (GetInputManager()->GetKey(KeyCode::E, KeyAction::Pressed)) {
+		if (GetInputManager()->GetKey(KeyCode::E, KeyAction::Pressed)) 
+		{
 			pl->Translate(glm::vec3(0, 0.05f, 0));
 		}
-		if (GetInputManager()->GetKey(KeyCode::Q, KeyAction::Pressed)) {
+		if (GetInputManager()->GetKey(KeyCode::Q, KeyAction::Pressed)) 
+		{
 			pl->Translate(glm::vec3(0, -0.05f, 0));
 		}
 
@@ -91,7 +97,7 @@ namespace Photon
 		light_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));*/
 
 		pl = new Photon::PointLight(glm::vec3(600.0f, 500.0f, 0.0f), glm::vec4(1, 1, 1, 1), true);
-		test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\monkey\\monkey.obj", glm::vec3(0.f,300.0f, 0.0f));
+		test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(0.f,300.0f, 0.0f));
 	}
 
 	void RenderScene::Dispose()

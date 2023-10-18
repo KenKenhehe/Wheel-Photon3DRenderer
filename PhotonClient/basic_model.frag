@@ -7,26 +7,28 @@ in vec3 vert_out_frag_pos;
 
 out vec4 FragColor;
 
-uniform vec4 Color;
-uniform sampler2D tex0;
+uniform vec4 objectColor;
+//uniform sampler2D texture_diffuse1;
 uniform vec4 lightColor;
 //uniform vec3 lightPosition;
 uniform vec3 camPos;
 
 void main()
 {
-   float ambient_intensity = 0.4;
-   vec3 normal = normalize(vert_out_normal);
-   
-   vec3 lightDirection = normalize(vert_out_light_pos - vert_out_frag_pos);
+    //ambient
+    float ambient_intensity = 0.3f;
 
-   float diffuse = max(dot(normal, lightDirection),0);
+    //diffuse
+    vec3 normal = normalize(vert_out_normal);
+    vec3 lightDirection = normalize(vert_out_light_pos - vert_out_frag_pos);
+    float diffuse = max(dot(normal, lightDirection),0);
 
-   float specular_light = 0.5f;
-   vec3 view_dir = normalize(camPos - vert_out_frag_pos);
-   vec3 reflection_dir = (-lightDirection, normal);
-   float spec_amount = pow(max(dot(view_dir, reflection_dir), 0), 8);
-   float specular = spec_amount * specular_light;
+    //specular
+    float specular_light = 0.5f;
+    vec3 view_dir = normalize(camPos - vert_out_frag_pos);
+    vec3 reflection_dir = reflect(-lightDirection, normal);
+    float spec_amount = pow(max(dot(view_dir, reflection_dir), 0), 8);
+    float specular = spec_amount * specular_light;
 
-   FragColor = Color * lightColor * (diffuse + ambient_intensity + specular);
+    FragColor = objectColor * lightColor * (diffuse + ambient_intensity + specular);
 }

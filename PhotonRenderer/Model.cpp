@@ -18,7 +18,7 @@ namespace Photon {
 		m_model = glm::translate(m_model, m_position);
 		//m_model = glm::scale(m_model, glm::vec3(1.0f, 1.0f, 1.0f));
 
-		m_shader = new Shader("basic_model.vert", "basic_model_lighting_re.frag");
+		m_shader = new Shader("basic_model.vert", "basic_model_texture.frag");
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 		m_shader->SetUniform4f("objectColor", 0.8f, 0.8f, 0.8f, 1);
@@ -79,6 +79,8 @@ namespace Photon {
 		std::vector<unsigned int> indices;
 		std::vector<TextureData> textures;
 
+		vertices.reserve(mesh->mNumVertices);
+
 		for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 		{
 			Vertex vertex;
@@ -106,21 +108,21 @@ namespace Photon {
 				vec.y = mesh->mTextureCoords[0][i].y;
 				vertex.tex_coord = vec;
 
-				//// tangent
-				//vector.x = mesh->mTangents[i].x;
-				//vector.y = mesh->mTangents[i].y;
-				//vector.z = mesh->mTangents[i].z;
-				//vertex.tangent = vector;
-				//// bitangent
-				//vector.x = mesh->mBitangents[i].x;
-				//vector.y = mesh->mBitangents[i].y;
-				//vector.z = mesh->mBitangents[i].z;
-				//vertex.bitangent = vector;
+				// tangent
+				vector.x = mesh->mTangents[i].x;
+				vector.y = mesh->mTangents[i].y;
+				vector.z = mesh->mTangents[i].z;
+				vertex.tangent = vector;
+				// bitangent
+				vector.x = mesh->mBitangents[i].x;
+				vector.y = mesh->mBitangents[i].y;
+				vector.z = mesh->mBitangents[i].z;
+				vertex.bitangent = vector;
 			}
 			else
 				vertex.tex_coord = glm::vec2(0.0f, 0.0f);
 
-			vertices.push_back(vertex);
+			vertices.emplace_back(vertex);
 		}
 
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++) 
@@ -128,11 +130,11 @@ namespace Photon {
 			aiFace face = mesh->mFaces[i];
 			for (unsigned int j = 0; j < face.mNumIndices; j++) 
 			{
-				indices.push_back(face.mIndices[j]);
+				indices.emplace_back(face.mIndices[j]);
 			}
 		}
 
-		/*aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
 		std::vector<TextureData> diffuse_maps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuse_maps.begin(), diffuse_maps.end());
@@ -144,7 +146,7 @@ namespace Photon {
 		textures.insert(textures.end(), normal_maps.begin(), normal_maps.end());
 
 		std::vector<TextureData> height_maps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-		textures.insert(textures.end(), height_maps.begin(), height_maps.end());*/
+		textures.insert(textures.end(), height_maps.begin(), height_maps.end());
 		std::cout << "Vertices size: " << vertices.size() << std::endl;
 		std::cout << "Indices size: " << indices.size() << std::endl;
 		return Mesh(vertices, indices, textures);

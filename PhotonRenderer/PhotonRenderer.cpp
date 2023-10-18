@@ -8,14 +8,15 @@ namespace Photon
 		// make sure the viewport matches the new window dimensions; note that width and 
 		// height will be significantly larger than specified on retina displays.
 		
-		if (PhotonApplication::instance->GetCamera() != nullptr) 
+		if (PhotonApplication::instance->GetCamera() != nullptr && width > 0 && height > 0) 
 		{
 			PhotonApplication::instance->GetCamera()->SetHeight(height);
 			PhotonApplication::instance->GetCamera()->SetWidth(width);
 			PhotonApplication::instance->GetCamera()->UpdateMatrix(45.0f, 0.1f, 100.0f);
 		}
-		else {
-			std::cout << "Photon instance is null\n";
+		else
+		{
+			std::cout << "Unable to resize window content\n";
 		}
 		glViewport(0, 0, width, height);
 	}

@@ -14,7 +14,7 @@ namespace Photon {
 
     void Mesh::Draw(Shader& shader)
     {
-        /*unsigned int diffuseNr = 1;
+        unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
         unsigned int normalNr = 1;
         unsigned int heightNr = 1;
@@ -32,13 +32,14 @@ namespace Photon {
             else if (name == "texture_height")
                 number = std::to_string(heightNr++);
             shader.SetInt((name + number), i);
-        }*/
+            glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
+        }
 
         m_vao->Bind();
         glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(m_indices.size()), GL_UNSIGNED_INT, 0);
         m_vao->Unbind();
 
-        //glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE0);
     }
 
     void Photon::Mesh::SetupMesh()
@@ -54,10 +55,10 @@ namespace Photon {
         m_vao->LinkAttrib(*m_vbo, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
         m_vao->LinkAttrib(*m_vbo, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, normal));
         m_vao->LinkAttrib(*m_vbo, 2, 2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, tex_coord));
-        /*m_vao->LinkAttrib(*m_vbo, 3, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
+        m_vao->LinkAttrib(*m_vbo, 3, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
         m_vao->LinkAttrib(*m_vbo, 4, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, bitangent));
         m_vao->LinkAttrib(*m_vbo, 5, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, bone_ids));
-        m_vao->LinkAttrib(*m_vbo, 6, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, weights));*/
+        m_vao->LinkAttrib(*m_vbo, 6, 3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, weights));
 
         m_vao->Unbind();
         m_vbo->Unbind();
