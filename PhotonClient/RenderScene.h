@@ -1,16 +1,19 @@
 #pragma once
 #include "PhotonRenderer.h"
 #include "Scene.h"
-#include "Cube.h"
-#include "Plane.h"
-#include "Line.h"
-#include "Point.h"
-#include "PointLight.h"
-#include "Model.h"
-#include <glad/glad.h>
+
+//#include <glad/glad.h>
 
 namespace Photon 
 {
+	class Point;
+	class FPSCamera;
+	class Cube;
+	class PointLight;
+	class Model;
+	class Plane;
+	class Shader;
+
 	class RenderScene : public Scene
 	{
 	public:
@@ -19,14 +22,17 @@ namespace Photon
 		void Dispose() override;
 	public:
 		//Photon::Line* m_line;
-		Photon::Point* m_point;
+		//Photon::Point* m_point;
 		Photon::FPSCamera* cam;
 		Photon::Cube* test_obj;
 		Photon::Cube* light_cube;
 		Photon::Plane* plane;
 		Photon::PointLight* pl;
+
 		Shader* light_shader;
 		Photon::Model* test_model;
 
+	private:
+		float moveSpeed = 5;
 	};
 }
