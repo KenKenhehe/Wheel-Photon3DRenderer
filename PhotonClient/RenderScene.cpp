@@ -1,5 +1,9 @@
 #include "RenderScene.h"
-#include <GLFW/glfw3.h>
+
+#include "Cube.h"
+#include "Plane.h"
+#include "PointLight.h"
+#include "Model.h"
 
 namespace Photon 
 {
@@ -13,37 +17,37 @@ namespace Photon
 		pl->ApplyLighting(test_obj);*/
 		//light_cube->Draw();
 
-		plane->Draw();
-		pl->ApplyLighting(plane);
+		//plane->Draw();
+		//pl->ApplyLighting(plane);
 
 		test_model->Draw();
 		pl->ApplyLighting(test_model);
 
 		pl->show();
-
+		float deltaTime = GetRenderer()->GetDeltaTime();
 		if (GetInputManager()->GetKey(KeyCode::Up, KeyAction::Pressed)) 
 		{
-			pl->Translate(glm::vec3(0, 0, -0.05f));
+			pl->Translate(glm::vec3(0, 0, -moveSpeed) * deltaTime);
 		}
 		if (GetInputManager()->GetKey(KeyCode::Down, KeyAction::Pressed)) 
 		{
-			pl->Translate(glm::vec3(0, 0, 0.05f));
+			pl->Translate(glm::vec3(0, 0, moveSpeed) * deltaTime);
 		}
 		if (GetInputManager()->GetKey(KeyCode::Left, KeyAction::Pressed)) 
 		{
-			pl->Translate(glm::vec3(-0.05f, 0, 0));
+			pl->Translate(glm::vec3(-moveSpeed, 0, 0) * deltaTime);
 		}
 		if (GetInputManager()->GetKey(KeyCode::Right, KeyAction::Pressed)) 
 		{
-			pl->Translate(glm::vec3(0.05f, 0, 0));
+			pl->Translate(glm::vec3(moveSpeed, 0, 0) * deltaTime);
 		}
 		if (GetInputManager()->GetKey(KeyCode::E, KeyAction::Pressed)) 
 		{
-			pl->Translate(glm::vec3(0, 0.05f, 0));
+			pl->Translate(glm::vec3(0, moveSpeed, 0) * deltaTime);
 		}
 		if (GetInputManager()->GetKey(KeyCode::Q, KeyAction::Pressed)) 
 		{
-			pl->Translate(glm::vec3(0, -0.05f, 0));
+			pl->Translate(glm::vec3(0, -moveSpeed, 0) * deltaTime);
 		}
 
 		//pl->SetPosition(cam->Position());
@@ -89,7 +93,7 @@ namespace Photon
 		//test_obj->LoadTexture("D:\\_PhotonRenderer\\Photon3DRenderer\\x64\\Release\\resources\\brick.png");
 		cam = new Photon::FPSCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
 		//light_shader = new Shader("light.vert", "light.frag");
-		plane = new Photon::Plane(4, 4, glm::vec3(400, 0, 0));
+		//plane = new Photon::Plane(4, 4, glm::vec3(400, 0, 0));
 
 		/*light_cube = new Photon::Cube(glm::vec3(0.01f, 0.01f, 0.01f), glm::vec3(600.0f, 500.0f, 0.0f));
 		light_cube->LoadShader(*light_shader);

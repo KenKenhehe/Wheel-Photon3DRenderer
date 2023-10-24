@@ -2,6 +2,7 @@
 #include <GLFW\glfw3.h>
 #include "InputManager.h"
 namespace Photon {
+	class PhotonApplication;
 	class PHOTON_API Scene
 	{
 	public:
@@ -19,15 +20,19 @@ namespace Photon {
 
 		void SetWidth(int width) { m_current_width = width; }
 		void SetHeight(int height) { m_current_height = height; }
+		void SetParentRenderer(PhotonApplication* parent_renderer) { m_parent_renderer = parent_renderer; }
 
 		int GetWidth() { return m_current_width; }
 		int GetHeight() { return m_current_height; }
+		PhotonApplication* GetRenderer() { return m_parent_renderer;}
+
 	private:
 
 		GLFWwindow* m_current_window = nullptr;
 		int m_current_width = 0;
 		int m_current_height = 0;
 		InputManager* m_input_manager = nullptr;
+		PhotonApplication* m_parent_renderer = nullptr;
 	};
 
 }

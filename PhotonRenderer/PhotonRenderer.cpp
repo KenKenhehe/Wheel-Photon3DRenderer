@@ -42,7 +42,7 @@ namespace Photon
 			glfwTerminate();
 			m_current_status = PhotonAppStatus::STATUS_CREATE_FAIL;
 		}
-
+		mainScene.SetParentRenderer(this);
 		mainScene.SetWindow(window);
 		mainScene.SetWidth(config.width);
 		mainScene.SetHeight(config.height);
