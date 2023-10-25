@@ -4,13 +4,15 @@
 #include "Plane.h"
 #include "PointLight.h"
 #include "Model.h"
+#include "FPSCamera.h"
 
 namespace Photon 
 {
 	void RenderScene::Render()
 	{
+		PhotonApplication* renderer = Photon::PhotonApplication::instance;
 		cam->HandleInput();
-		cam->UpdateMatrix(45.0f, 0.1f, 100.0f);
+		//cam->UpdateMatrix(45.0f, 0.1f, 100.0f);
 		cam->Update();
 
 		/*test_obj->Draw();
@@ -91,7 +93,7 @@ namespace Photon
 		test_obj = new Photon::Cube(1, 1, 1, glm::vec3(800.0f, 400.0f, 0.0f));
 		//TODO: change this to handle reletive path
 		//test_obj->LoadTexture("D:\\_PhotonRenderer\\Photon3DRenderer\\x64\\Release\\resources\\brick.png");
-		cam = new Photon::FPSCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
+		cam = new FPSCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
 		//light_shader = new Shader("light.vert", "light.frag");
 		//plane = new Photon::Plane(4, 4, glm::vec3(400, 0, 0));
 
@@ -110,7 +112,7 @@ namespace Photon
 		delete cam;
 		//delete light_cube;
 		//delete m_line;
-		delete m_point;
+		//delete m_point;
 		delete pl;
 	}
 }

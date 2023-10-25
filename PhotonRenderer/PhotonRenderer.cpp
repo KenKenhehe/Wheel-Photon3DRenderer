@@ -90,7 +90,7 @@ namespace Photon
 
 		delete m_input_manager;
 	}
-	void PhotonApplication::SetMainCamera(FPSCamera* cam)
+	void PhotonApplication::SetMainCamera(Camera* cam)
 	{
 		if (m_main_camera == nullptr) 
 			m_main_camera = cam;

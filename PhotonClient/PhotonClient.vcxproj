@@ -163,10 +163,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="PhotonClient.cpp" />
     <ClCompile Include="RenderScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="RenderScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

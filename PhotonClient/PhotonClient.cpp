@@ -5,8 +5,11 @@
 #include "glm/glm.hpp"
 #include "photonRenderer.h"
 #include "RenderScene.h"
+#include "InputManager.h"
 
 using namespace Photon;
+Photon::PhotonApplication* Photon::PhotonApplication::instance;
+Photon::InputManager* Photon::InputManager::instance;
 
 int main(int argc, char* argv[])
 {

@@ -8,7 +8,7 @@ namespace Photon
 		Line(glm::vec3 start, glm::vec3 end);
 		Line(glm::vec2 start, glm::vec2 end);
 
-		void Draw(FPSCamera* cam = nullptr) override;
+		void Draw(Camera* cam = nullptr) override;
 	private:
 		glm::vec3 m_start;
 		glm::vec3 m_end;

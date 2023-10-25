@@ -19,7 +19,7 @@ namespace Photon
 	}
 
 
-	void Line::Draw(FPSCamera* cam)
+	void Line::Draw(Camera* cam)
 	{
 		if (!m_init_success)
 		{

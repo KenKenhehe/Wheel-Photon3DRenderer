@@ -4,11 +4,10 @@ Photon::PhotonApplication* Photon::PhotonApplication::instance;
 
 namespace Photon
 {
-	FPSCamera::FPSCamera(int width, int height, glm::vec3 position) :
+	Camera::Camera(int width, int height, glm::vec3 position) :
 		m_width(width), m_height(height), m_position(position)
 	{
 		Photon::PhotonApplication::instance->SetMainCamera(this);
-		//UpdateMatrix(45.0f, 0.1f, 100.0f);
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
 
@@ -19,7 +18,7 @@ namespace Photon
 		m_view_matrix = view;
 	}
 
-	void FPSCamera::UpdateMatrix(float FOVdeg, float near_plane, float far_plane)
+	void Camera::UpdateMatrix(float FOVdeg, float near_plane, float far_plane)
 	{
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
@@ -30,7 +29,7 @@ namespace Photon
 		m_view_matrix = view;
 	}
 
-	void FPSCamera::Update()
+	void Camera::Update()
 	{
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
@@ -42,13 +41,13 @@ namespace Photon
 		m_view_matrix = view;
 	}
 
-	void FPSCamera::SetUniform(Shader& shader, const std::string& uniform)
+	void Camera::SetUniform(Shader& shader, const std::string& uniform)
 	{
 		shader.SetUniformMat4(uniform, m_cam_matrix);
 		shader.SetUniformMat4("view", m_view_matrix);
 	}
 
-	void FPSCamera::HandleInput()
+	/*void FPSCamera::HandleInput()
 	{
 		GLFWwindow* window = Photon::PhotonApplication::instance->GetWindow();
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -119,11 +118,11 @@ namespace Photon
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			m_first_clicked = true;
 		}
-	}
-	Camera::Camera()
-	{
-	}
-	void Camera::Update()
-	{
-	}
+	}*/
+	//Camera::Camera()
+	//{
+	//}
+	//void Camera::Update()
+	//{
+	//}
 }
