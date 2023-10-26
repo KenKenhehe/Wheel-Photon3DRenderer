@@ -5,12 +5,12 @@
 #include "PointLight.h"
 #include "Model.h"
 #include "FPSCamera.h"
-
+#include "InputManager.h"
 namespace Photon 
 {
 	void RenderScene::Render()
 	{
-		PhotonApplication* renderer = Photon::PhotonApplication::instance;
+		
 		cam->HandleInput();
 		//cam->UpdateMatrix(45.0f, 0.1f, 100.0f);
 		cam->Update();
@@ -27,27 +27,27 @@ namespace Photon
 
 		pl->show();
 		float deltaTime = GetRenderer()->GetDeltaTime();
-		if (GetInputManager()->GetKey(KeyCode::Up, KeyAction::Pressed)) 
+		if (InputManager::Instance().GetKey(KeyCode::Up, KeyAction::Pressed))
 		{
 			pl->Translate(glm::vec3(0, 0, -moveSpeed) * deltaTime);
 		}
-		if (GetInputManager()->GetKey(KeyCode::Down, KeyAction::Pressed)) 
+		if (InputManager::Instance().GetKey(KeyCode::Down, KeyAction::Pressed))
 		{
 			pl->Translate(glm::vec3(0, 0, moveSpeed) * deltaTime);
 		}
-		if (GetInputManager()->GetKey(KeyCode::Left, KeyAction::Pressed)) 
+		if (InputManager::Instance().GetKey(KeyCode::Left, KeyAction::Pressed))
 		{
 			pl->Translate(glm::vec3(-moveSpeed, 0, 0) * deltaTime);
 		}
-		if (GetInputManager()->GetKey(KeyCode::Right, KeyAction::Pressed)) 
+		if (InputManager::Instance().GetKey(KeyCode::Right, KeyAction::Pressed))
 		{
 			pl->Translate(glm::vec3(moveSpeed, 0, 0) * deltaTime);
 		}
-		if (GetInputManager()->GetKey(KeyCode::E, KeyAction::Pressed)) 
+		if (InputManager::Instance().GetKey(KeyCode::E, KeyAction::Pressed))
 		{
 			pl->Translate(glm::vec3(0, moveSpeed, 0) * deltaTime);
 		}
-		if (GetInputManager()->GetKey(KeyCode::Q, KeyAction::Pressed)) 
+		if (InputManager::Instance().GetKey(KeyCode::Q, KeyAction::Pressed))
 		{
 			pl->Translate(glm::vec3(0, -moveSpeed, 0) * deltaTime);
 		}
@@ -89,7 +89,7 @@ namespace Photon
 	void RenderScene::OnCreate()
 	{
 		//m_point = new Photon::Point(glm::vec2(600, 400));
-
+		//input_manager = new InputManager(GetRenderer()->GetWindow());
 		test_obj = new Photon::Cube(1, 1, 1, glm::vec3(800.0f, 400.0f, 0.0f));
 		//TODO: change this to handle reletive path
 		//test_obj->LoadTexture("D:\\_PhotonRenderer\\Photon3DRenderer\\x64\\Release\\resources\\brick.png");

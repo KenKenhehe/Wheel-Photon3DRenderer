@@ -47,9 +47,9 @@ namespace Photon
 		mainScene.SetWidth(config.width);
 		mainScene.SetHeight(config.height);
 
-		m_input_manager = new InputManager(window);
+		//m_input_manager = new InputManager(window);
 
-		mainScene.SetInputManager(m_input_manager);
+		//mainScene.SetInputManager(m_input_manager);
 
 		m_config = config;
 
@@ -88,7 +88,7 @@ namespace Photon
 		}
 		mainScene.Dispose();
 
-		delete m_input_manager;
+		//delete m_input_manager;
 	}
 	void PhotonApplication::SetMainCamera(Camera* cam)
 	{

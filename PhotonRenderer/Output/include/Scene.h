@@ -1,6 +1,6 @@
 #pragma once
 #include <GLFW\glfw3.h>
-#include "InputManager.h"
+#include "Core.h"
 namespace Photon {
 	class PhotonApplication;
 	class PHOTON_API Scene
@@ -13,10 +13,6 @@ namespace Photon {
 		void virtual Dispose() {};
 		void SetWindow(GLFWwindow* window) { m_current_window = window; }
 		GLFWwindow* GetCurrentWindow() { return m_current_window; }
-
-		void SetInputManager(InputManager* inputManager) { m_input_manager = inputManager; }
-		InputManager* GetInputManager() { return m_input_manager; }
-
 
 		void SetWidth(int width) { m_current_width = width; }
 		void SetHeight(int height) { m_current_height = height; }
@@ -31,7 +27,6 @@ namespace Photon {
 		GLFWwindow* m_current_window = nullptr;
 		int m_current_width = 0;
 		int m_current_height = 0;
-		InputManager* m_input_manager = nullptr;
 		PhotonApplication* m_parent_renderer = nullptr;
 	};
 

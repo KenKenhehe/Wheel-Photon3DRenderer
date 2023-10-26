@@ -1,6 +1,7 @@
 #pragma once
 #include "PhotonRenderer.h"
 #include "Scene.h"
+#include "InputManager.h"
 
 //#include <glad/glad.h>
 
@@ -31,7 +32,7 @@ namespace Photon
 
 		Shader* light_shader;
 		Photon::Model* test_model;
-
+		InputManager* input_manager;
 	private:
 		float moveSpeed = 5;
 	};

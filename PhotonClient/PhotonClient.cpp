@@ -9,7 +9,6 @@
 
 using namespace Photon;
 Photon::PhotonApplication* Photon::PhotonApplication::instance;
-Photon::InputManager* Photon::InputManager::instance;
 
 int main(int argc, char* argv[])
 {

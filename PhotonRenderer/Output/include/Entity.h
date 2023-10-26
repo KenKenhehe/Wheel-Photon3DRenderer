@@ -14,6 +14,7 @@
 namespace Photon
 {
 	class Light;
+	//class InputManager;
 	class PHOTON_API Entity
 	{
 	public:
@@ -76,7 +77,7 @@ namespace Photon
 		bool m_has_texture = false;
 
 		std::string m_current_app_path;
-
+		//InputManager m_input_manager;
 	};
 }
 #endif // !PHOTON_ENTITY_H

@@ -1,13 +1,16 @@
 #pragma once
-#include <GLFW/glfw3.h>
 #include <iostream>
-#include "Core.h"
+#include "PhotonRenderer.h"
+
 
 namespace Photon {
 
 	enum class KeyCode
 	{
 		A = GLFW_KEY_A,
+		W = GLFW_KEY_W,
+		S = GLFW_KEY_S,
+		D = GLFW_KEY_D,
 		Up = GLFW_KEY_UP,
 		Down = GLFW_KEY_DOWN,
 		Left = GLFW_KEY_LEFT,
@@ -56,10 +59,7 @@ namespace Photon {
 		//Call UpdateCursorPosition() first before calling GetMouseX(Y) to get the current mouse position
 		double GetMouseY() const { return m_cursor_y; }
 
-		static InputManager& Instance() {
-			static InputManager instance;
-			return instance; 
-		}
+		static InputManager& Instance();
 
 		void UpdateCursorPosition();
 
