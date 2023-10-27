@@ -10,9 +10,7 @@ namespace Photon
 {
 	void RenderScene::Render()
 	{
-		
 		cam->HandleInput();
-		//cam->UpdateMatrix(45.0f, 0.1f, 100.0f);
 		cam->Update();
 
 		/*test_obj->Draw();

@@ -4,15 +4,15 @@ Photon::PhotonApplication* Photon::PhotonApplication::instance;
 
 namespace Photon
 {
-	Camera::Camera(int width, int height, glm::vec3 position) :
-		m_width(width), m_height(height), m_position(position)
+	Camera::Camera(int width, int height, glm::vec3 position, float near_plane, float far_plane) :
+		m_width(width), m_height(height), m_position(position), m_near_plane(near_plane), m_far_plane(far_plane)
 	{
 		Photon::PhotonApplication::instance->SetMainCamera(this);
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
 
 		view = glm::lookAt(m_position, m_position + m_rotation, m_up);
-		projection = glm::perspective(glm::radians(45.0f), (float)(m_width / m_height), 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(45.0f), (float)(m_width / m_height), m_near_plane, m_far_plane);
 
 		m_cam_matrix = projection * view;
 		m_view_matrix = view;

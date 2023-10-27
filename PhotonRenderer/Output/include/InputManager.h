@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "PhotonRenderer.h"
-
+#include "glm/glm.hpp"
 
 namespace Photon {
 
@@ -52,12 +52,15 @@ namespace Photon {
 		bool GetMouseButton(MouseKey mouse_key, KeyAction key_action) const;
 		void SetCursorVisibility(bool visible);
 		void SetCursorEnable(bool enable);
+		void SetMousePosition(double x, double y);
 		
 		//Call UpdateCursorPosition() first before calling GetMouseX(Y) to get the current mouse position
 		double GetMouseX() const { return m_cursor_x; }
 
 		//Call UpdateCursorPosition() first before calling GetMouseX(Y) to get the current mouse position
 		double GetMouseY() const { return m_cursor_y; }
+
+		glm::vec2 GetMousePosition();
 
 		static InputManager& Instance();
 

@@ -40,7 +40,7 @@ namespace Photon
 	class PHOTON_API Camera
 	{
 	public:
-		Camera(int width, int height, glm::vec3 position);
+		Camera(int width, int height, glm::vec3 position, float near_plane = 0.1f, float far_plane = 100.f);
 		void UpdateMatrix(float FOVdeg, float near_plane, float far_plane);
 		void Update();
 		void SetUniform(Shader& shader, const std::string& uniform);

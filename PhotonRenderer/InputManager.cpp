@@ -6,7 +6,6 @@ namespace Photon
 
 	Photon::InputManager::InputManager(GLFWwindow* parent_window) : m_parent_window(parent_window)
 	{
-		m_parent_window = Photon::PhotonApplication::instance->GetWindow();
 	}
 
 	bool Photon::InputManager::GetKey(KeyCode key_code, KeyAction key_action)
@@ -43,6 +42,19 @@ namespace Photon
 		{
 			glfwSetInputMode(m_parent_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		}
+	}
+
+	void InputManager::SetMousePosition(double x, double y)
+	{
+		glfwSetCursorPos(m_parent_window, x, y);
+		m_cursor_x = x;
+		m_cursor_y = y;
+	}
+
+	glm::vec2 InputManager::GetMousePosition()
+	{
+		glfwGetCursorPos(m_parent_window, &m_cursor_x, &m_cursor_y);
+		return glm::vec2(m_cursor_x, m_cursor_y);
 	}
 
 	InputManager& InputManager::Instance()
