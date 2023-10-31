@@ -17,11 +17,11 @@ namespace Photon
 		pl->ApplyLighting(test_obj);*/
 		//light_cube->Draw();
 
-		//plane->Draw();
-		//pl->ApplyLighting(plane);
+		plane->Draw();
+		pl->ApplyLighting(plane);
 
-		test_model->Draw();
-		pl->ApplyLighting(test_model);
+		/*test_model->Draw();
+		pl->ApplyLighting(test_model);*/
 
 		pl->show();
 		float deltaTime = GetRenderer()->GetDeltaTime();
@@ -93,7 +93,7 @@ namespace Photon
 		//test_obj->LoadTexture("D:\\_PhotonRenderer\\Photon3DRenderer\\x64\\Release\\resources\\brick.png");
 		cam = new FPSCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
 		//light_shader = new Shader("light.vert", "light.frag");
-		//plane = new Photon::Plane(4, 4, glm::vec3(400, 0, 0));
+		plane = new Photon::Plane(4, 4, glm::vec3(400, 0, 0));
 
 		/*light_cube = new Photon::Cube(glm::vec3(0.01f, 0.01f, 0.01f), glm::vec3(600.0f, 500.0f, 0.0f));
 		light_cube->LoadShader(*light_shader);
@@ -101,16 +101,17 @@ namespace Photon
 		light_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));*/
 
 		pl = new Photon::PointLight(glm::vec3(600.0f, 500.0f, 0.0f), glm::vec4(1, 1, 1, 1), true);
-		test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(0.f,300.0f, 0.0f));
+		//test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(0.f,300.0f, 0.0f));
 	}
 
 	void RenderScene::Dispose()
 	{
-		delete test_obj;
+		//delete test_obj;
 		delete cam;
 		//delete light_cube;
 		//delete m_line;
 		//delete m_point;
+		delete plane;
 		delete pl;
 	}
 }
