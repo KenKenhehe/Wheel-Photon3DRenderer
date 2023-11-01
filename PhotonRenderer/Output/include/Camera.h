@@ -75,7 +75,6 @@ namespace Photon
 		float m_fov = 45.0f;
 		float m_near_plane = 0.1f;
 		float m_far_plane = 100.0f;
-
 	};
 }
 #endif

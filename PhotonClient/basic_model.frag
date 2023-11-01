@@ -9,7 +9,7 @@ out vec4 FragColor;
 
 uniform vec4 objectColor;
 //uniform sampler2D texture_diffuse1;
-uniform vec4 lightColor;
+uniform vec3 lightColor;
 //uniform vec3 lightPosition;
 uniform vec3 camPos;
 
@@ -30,5 +30,6 @@ void main()
     float spec_amount = pow(max(dot(view_dir, reflection_dir), 0), 8);
     float specular = spec_amount * specular_light;
 
-    FragColor = objectColor * lightColor * (diffuse + ambient_intensity + specular);
+    vec3 result = lightColor * (diffuse + ambient_intensity + specular);
+    FragColor = objectColor * vec4(result, 1.0);
 }

@@ -9,11 +9,11 @@ out vec4 FragColor;
 
 uniform vec4 Color;
 uniform sampler2D tex0;
-uniform vec4 lightColor;
+uniform vec3 lightColor;
 //uniform vec3 lightPosition;
 uniform vec3 camPos;
 
 void main()
 {
-   FragColor = lightColor;
+   FragColor = vec4(lightColor, 1.0);
 }

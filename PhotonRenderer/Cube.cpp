@@ -358,16 +358,33 @@ namespace Photon
 
 	void Cube::LoadDefaultShader()
 	{
-		m_shader = new Shader("basic_model.vert", "basic_model.frag");
+		m_shader = new Shader("basic_model.vert", "material_test.frag");
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
 		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
 		m_shader->SetUniformVec4("objectColor", objectColor);
+		m_material.ambient = glm::vec3(0.6f);
+		m_material.diffuse = glm::vec3(1);
+		m_material.specular = glm::vec3(1);
+		m_material.shininess = 8;
+
+		m_shader->SetUniformVec3("material.ambient", m_material.ambient);
+		m_shader->SetUniformVec3("material.diffuse", m_material.diffuse);
+		m_shader->SetUniformVec3("material.specular", m_material.specular);
+		m_shader->SetFloat("material.shininess", m_material.shininess);
 	}
 
 	void Cube::LoadShader(Shader* shader)
 	{
 		m_shader = shader;
 		m_shader->Activate();
+	}
+	void Cube::SetMaterial(const Material& material)
+	{
+		m_material = material;
+		m_shader->SetUniformVec3("material.ambient", m_material.ambient);
+		m_shader->SetUniformVec3("material.diffuse", m_material.diffuse);
+		m_shader->SetUniformVec3("material.specular", m_material.specular);
+		m_shader->SetFloat("material.shininess", m_material.shininess);
 	}
 }

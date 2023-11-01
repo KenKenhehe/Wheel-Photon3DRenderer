@@ -188,6 +188,7 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PhotonRenderer.cpp" />
@@ -212,6 +213,7 @@ copy $(ProjectDir)*.h $(ProjectDir)Output\include</Command>
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PhotonRenderer.h" />

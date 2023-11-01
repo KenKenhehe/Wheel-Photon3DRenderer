@@ -6,6 +6,7 @@
 #include <glm\gtc\type_ptr.hpp>
 
 #include "Entity.h"
+#include "Material.h"
 
 namespace Photon
 {
@@ -29,6 +30,7 @@ namespace Photon
 		void LoadDefaultShader();
 		void LoadShader(Shader* shader);
 		glm::vec3 GetPosition() { return m_position; }
+		void SetMaterial(const Material& material);
 
 	private:
 		bool Init() override;
@@ -36,6 +38,7 @@ namespace Photon
 	private:
 		glm::vec3 m_scale;
 		Texture* m_texture = nullptr;
+		Material m_material;
 	};
 
 }

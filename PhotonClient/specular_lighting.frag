@@ -14,6 +14,11 @@ uniform vec4 lightColor;
 //uniform vec3 lightPosition;
 uniform vec3 camPos;
 
+vec4 specular_light()
+{
+    
+}
+
 void main()
 {
     //ambient

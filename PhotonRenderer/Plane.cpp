@@ -96,7 +96,6 @@ namespace Photon
 		m_shader = new Shader("basic_model.vert", "basic_model.frag");
 		m_shader->Activate();
 		m_shader->SetUniformMat4("model", m_model);
-
 		glm::vec4 objectColor = glm::vec4(1, 0, 0, 1);
 		m_shader->SetUniformVec4("objectColor", objectColor);
 

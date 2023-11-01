@@ -13,8 +13,8 @@ namespace Photon
 		cam->HandleInput();
 		cam->Update();
 
-		/*test_obj->Draw();
-		pl->ApplyLighting(test_obj);*/
+		test_obj->Draw();
+		pl->ApplyLighting(test_obj);
 		//light_cube->Draw();
 
 		plane->Draw();
