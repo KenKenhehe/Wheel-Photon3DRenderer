@@ -6,8 +6,8 @@ Photon::PointLight::PointLight(glm::vec3 position, glm::vec4 light_color, bool v
 	if (visual) 
 	{
 		light_visual_cube = new Cube(glm::vec3(0.1, 0.1, 0.1), position);
-		Shader* light_shader = new Shader("light.vert", "light.frag");
-		light_visual_cube->LoadShader(light_shader);
+		Shader* light_cube_shader = new Shader("light.vert", "light.frag");
+		light_visual_cube->LoadShader(light_cube_shader);
 		light_visual_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));
 
 	}
@@ -24,6 +24,9 @@ void Photon::PointLight::ApplyLighting(Entity* entity)
 
 void Photon::PointLight::show()
 {
-	light_visual_cube->Draw();
-	light_visual_cube->SetPosition(m_position);
+	if (m_enable_visual)
+	{
+		light_visual_cube->Draw();
+		light_visual_cube->SetPosition(m_position);
+	}
 }
