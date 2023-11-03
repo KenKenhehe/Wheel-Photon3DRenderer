@@ -23,7 +23,7 @@ namespace Photon
 		void Translate(glm::vec3 translation)
 		{
 			m_model = glm::translate(m_model, translation);
-			m_position += translation;
+			m_position = glm::vec3(m_model[3]);
 		}
 
 		void SetPosition(glm::vec3 pos) {
@@ -32,10 +32,45 @@ namespace Photon
 			m_model = glm::translate(identity, pos);
 		}
 
+		glm::vec3 GetPosition() { 
+			m_position = glm::vec3(m_model[3]);
+			return m_position; 
+		}
+
 		void Rotate(float angle, glm::vec3 axis)
 		{
 			m_model = glm::rotate(m_model, glm::radians(angle), axis);
+			m_position = glm::vec3(m_model[3]);
 		}
+
+		void Rotate(glm::vec3 rotation_to_add)
+		{
+			glm::vec3 new_rotation =  m_rotation + rotation_to_add;
+			SetRotation(rotation_to_add);
+		}
+
+		void SetRotation(glm::vec3 rotation) 
+		{
+			m_rotation = rotation;
+
+			m_model = glm::rotate(m_model, glm::radians(rotation.x), glm::vec3(1, 0, 0));
+			m_model = glm::rotate(m_model, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+			m_model = glm::rotate(m_model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+			m_position = glm::vec3(m_model[3]);
+		}
+
+		glm::vec3 GetRotation() {
+			return m_rotation;
+		}
+
+		glm::mat4 GetModelMatrix() {
+			return m_model;
+		}
+
+		/*void SetModelMatrix(glm::mat4 model_matrix) 
+		{
+			m_model = model_matrix;
+		}*/
 
 		void virtual Draw(Camera* camera = nullptr) {};
 
@@ -53,8 +88,9 @@ namespace Photon
 		bool virtual Init();
 		
 	protected:
-		glm::vec3 m_position = glm::vec3(0, 0, 0);
 		glm::mat4 m_model = glm::mat4(1.0f);
+		glm::vec3 m_position = glm::vec3(m_model[3]);
+		glm::vec3 m_rotation = glm::vec3(0);
 
 		VertexBuffer* m_vbo = nullptr;
 		IndexBuffer* m_ibo = nullptr;

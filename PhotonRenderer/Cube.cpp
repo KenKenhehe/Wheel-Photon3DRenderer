@@ -363,7 +363,7 @@ namespace Photon
 		m_shader->SetUniformMat4("model", m_model);
 		glm::vec4 objectColor = glm::vec4(1, 1, 1, 1);
 		m_shader->SetUniformVec4("objectColor", objectColor);
-		m_material.ambient = glm::vec3(0.6f);
+		m_material.ambient = glm::vec3(0.4f);
 		m_material.diffuse = glm::vec3(1);
 		m_material.specular = glm::vec3(1);
 		m_material.shininess = 8;

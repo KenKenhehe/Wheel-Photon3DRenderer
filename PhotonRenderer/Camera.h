@@ -10,33 +10,6 @@
 
 namespace Photon
 {
-	//class PHOTON_API Camera 
-	//{
-	//public:
-	//	Camera();
-	//	virtual void Update() = 0;  
-	//	virtual void HandleInput() = 0;
-
-	//private:
-	//	glm::vec3 m_position;
-	//	glm::vec3 m_rotation = glm::vec3(0.0f, 0.0f, -1.0f);
-	//	glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	//	glm::mat4 m_cam_matrix;
-
-	//	//Hack
-	//	glm::mat4 m_view_matrix;
-
-	//	int m_width;
-	//	int m_height;
-
-	//	float m_speed = 0.01f;
-	//	float m_sensitivity = 100.0f;
-	//	float m_fov = 45.0f;
-	//	float m_near_plane = 0.1f;
-	//	float m_far_plane = 100.0f;
-	//};
-
 	class PHOTON_API Camera
 	{
 	public:
@@ -59,9 +32,12 @@ namespace Photon
 		void SetFarPlane(float far_plane) { m_far_plane = far_plane; }
 
 		glm::vec3 Position() { return m_position; }
+		glm::vec3 Rotation() { return m_rotation; }
+
+		void SetFocus(Entity* entity);
 	protected:
 		glm::vec3 m_position;
-		glm::vec3 m_rotation = glm::vec3(0.0f, 0.0f, -1.0f);
+		glm::vec3 m_rotation = glm::vec3(0.0f, 0.0f, 1.0f);
 		glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
 
 		glm::mat4 m_cam_matrix;

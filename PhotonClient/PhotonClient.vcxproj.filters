@@ -24,12 +24,18 @@
     <ClCompile Include="FPSCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TankGameCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FPSCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TankGameCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

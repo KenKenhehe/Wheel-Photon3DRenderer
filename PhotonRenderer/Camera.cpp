@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Entity.h"
 
 Photon::PhotonApplication* Photon::PhotonApplication::instance;
 
@@ -45,6 +46,14 @@ namespace Photon
 	{
 		shader.SetUniformMat4(uniform, m_cam_matrix);
 		shader.SetUniformMat4("view", m_view_matrix);
+	}
+
+	void Camera::SetFocus(Entity* entity)
+	{
+		std::cout << "Original rotation: " << m_rotation.x << ", " << m_rotation.y << ", " << m_rotation.z << std::endl;
+		std::cout << entity->GetRotation().x << ", " << entity->GetRotation().y << ", " << entity->GetRotation().z << std::endl;
+		//m_rotation = entity->GetRotation();
+		//m_position = entity->GetPosition() - distance * entity->GetRotation();
 	}
 
 	/*void FPSCamera::HandleInput()

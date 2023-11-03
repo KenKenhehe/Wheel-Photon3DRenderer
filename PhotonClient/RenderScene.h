@@ -14,6 +14,7 @@ namespace Photon
 	class Model;
 	class Plane;
 	class Shader;
+	class TankGameCamera;
 
 	class RenderScene : public Scene
 	{
@@ -21,6 +22,8 @@ namespace Photon
 		void Render() override;
 		void OnCreate() override;
 		void Dispose() override;
+
+		void Update(float delta_time) override;
 
 	public:
 		Photon::FPSCamera* cam;
@@ -31,6 +34,7 @@ namespace Photon
 
 		Photon::Model* test_model;
 		InputManager* input_manager;
+		TankGameCamera* game_cam;
 	private:
 		float moveSpeed = 5;
 	};

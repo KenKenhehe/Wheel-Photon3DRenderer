@@ -8,9 +8,10 @@ namespace Photon {
 	public:
 		Scene() {};
 	public:
-		void virtual OnCreate() {};
-		void virtual Render() {};
-		void virtual Dispose() {};
+		void virtual OnCreate() {}
+		void virtual Render() {}
+		void virtual Update(float delta_time) {}
+		void virtual Dispose() {}
 		void SetWindow(GLFWwindow* window) { m_current_window = window; }
 		GLFWwindow* GetCurrentWindow() { return m_current_window; }
 
