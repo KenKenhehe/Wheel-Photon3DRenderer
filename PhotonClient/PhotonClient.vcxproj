@@ -166,10 +166,12 @@
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="PhotonClient.cpp" />
     <ClCompile Include="RenderScene.cpp" />
+    <ClCompile Include="TankGameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="RenderScene.h" />
+    <ClInclude Include="TankGameCamera.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -63,7 +63,6 @@ namespace Photon
 		glViewport(0, 0, config.width, config.height);
 
 		glfwSwapBuffers(window);
-
 		mainScene.OnCreate();
 		for (int i = 0; i < m_entities.size(); i++)
 		{
@@ -77,12 +76,16 @@ namespace Photon
 			float start_time = glfwGetTime();
 			glClearColor(.2f, .3f, .3f, 1);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			mainScene.Update(m_current_delta_time);
 			mainScene.Render();
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 
 			//get delta time
 			m_current_delta_time = glfwGetTime() - start_time;
+			
+			
+
 			float current_fps = 1 / m_current_delta_time;
 			glfwSetWindowTitle(window, std::to_string((int)current_fps).c_str());
 		}
