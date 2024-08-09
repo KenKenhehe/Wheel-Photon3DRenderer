@@ -11,6 +11,7 @@ namespace Photon
 {
 	void RenderScene::Update(float delta_time)
 	{
+		InputManager::Instance().Update();
 		/*cam->HandleInput();
 		cam->Update();*/
 
@@ -39,7 +40,9 @@ namespace Photon
 			pl->Translate(glm::vec3(0, -moveSpeed, 0) * delta_time);
 		}*/
 		
-		
+		if (InputManager::Instance().GetMouseButtonDown(MouseKey::LeftMouseButton)) {
+			std::cout << "Left key Pressed, fire\n";
+		}
 
 		if (InputManager::Instance().GetKey(KeyCode::W, KeyAction::Pressed))
 		{
@@ -61,11 +64,11 @@ namespace Photon
 			test_obj->Rotate(glm::vec3(0, -delta_time * 45, 0));
 		}
 		//game_cam->HandleInput(delta_time);
-		game_cam->SetPosition(test_obj->GetPosition() - glm::vec3(0, -1, 6));
+		game_cam->SetPosition(test_obj->GetPosition() - glm::vec3(0, -7, 10));
 
 		pl->SetPosition(game_cam->Position());
 		//std::cout << "rotation: X: " << game_cam->Rotation().x << ", y: " << game_cam->Rotation().y << ", Z: " << game_cam->Rotation().z << "\n";
-		std::cout << "position: X: " << game_cam->Position().x << ", y: " << game_cam->Position().y << ", Z: " << game_cam->Position().z << "\n";
+		//std::cout << "position: X: " << game_cam->Position().x << ", y: " << game_cam->Position().y << ", Z: " << game_cam->Position().z << "\n";
 
 	}
 	void RenderScene::Render()
@@ -128,7 +131,8 @@ namespace Photon
 		light_cube->GetShader()->SetUniformVec4("lightColor", glm::vec4(1, 1, 1, 1));*/
 
 		pl = new Photon::PointLight(glm::vec3(600.0f, 500.0f, 0.0f), glm::vec4(1, 1, 1, 1), false);
-		game_cam = new TankGameCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
+		game_cam = new TankGameCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 200.0f, 300.0f));
+		game_cam->SetRotation(glm::vec3(0.f, -0.6f, 1));
 		//test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(0.f,300.0f, 0.0f));
 	}
 

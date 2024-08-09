@@ -49,7 +49,9 @@ namespace Photon {
 		bool GetKey(KeyCode key_code, KeyAction key_action);
 
 		//Mouse-related input
-		bool GetMouseButton(MouseKey mouse_key, KeyAction key_action) const;
+		bool GetMouseButton(MouseKey mouse_key, KeyAction key_action);
+		bool GetMouseButtonDown(MouseKey mouse_key);
+
 		void SetCursorVisibility(bool visible);
 		void SetCursorEnable(bool enable);
 		void SetMousePosition(double x, double y);
@@ -65,6 +67,7 @@ namespace Photon {
 		static InputManager& Instance();
 
 		void UpdateCursorPosition();
+		void Update();
 
 		/*InputManager(const InputManager&) = delete;
 		InputManager& operator=(const InputManager&) = delete;*/
@@ -74,6 +77,8 @@ namespace Photon {
 		//Mouse-related states
 		double m_cursor_x = 0;
 		double m_cursor_y = 0;
+
+		bool hasMouseButtonPressed = false;
 	};
 
 }

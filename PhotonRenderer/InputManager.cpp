@@ -14,9 +14,21 @@ namespace Photon
 		return key_result;
 	}
 
-	bool Photon::InputManager::GetMouseButton(MouseKey mouse_key, KeyAction key_action) const
+	bool Photon::InputManager::GetMouseButton(MouseKey mouse_key, KeyAction key_action)
 	{
 		bool key_result = glfwGetMouseButton(m_parent_window, (int)mouse_key) == (int)key_action;
+
+		return key_result;
+	}
+
+	bool Photon::InputManager::GetMouseButtonDown(MouseKey mouse_key)
+	{
+		bool key_result = false;
+		if (hasMouseButtonPressed == false) {
+			key_result = glfwGetMouseButton(m_parent_window, (int)mouse_key) == (int)KeyAction::Pressed;
+			if(key_result)
+				hasMouseButtonPressed = true;
+		}
 		return key_result;
 	}
 
@@ -68,5 +80,12 @@ namespace Photon
 		glfwGetCursorPos(m_parent_window, &m_cursor_x, &m_cursor_y);
 	}
 
-
+	void InputManager::Update()
+	{
+		UpdateCursorPosition();
+		if (GetMouseButton(MouseKey::LeftMouseButton, KeyAction::Release)) 
+		{
+			hasMouseButtonPressed = false;
+		}
+	}
 }
