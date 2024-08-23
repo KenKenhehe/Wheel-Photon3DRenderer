@@ -46,25 +46,25 @@ namespace Photon
 
 		if (InputManager::Instance().GetKey(KeyCode::W, KeyAction::Pressed))
 		{
-			test_obj->Translate(glm::vec3(0, 0, moveSpeed) * delta_time);
+			test_model->Translate(glm::vec3(0, 0, moveSpeed) * delta_time);
 		}
 
 		if (InputManager::Instance().GetKey(KeyCode::S, KeyAction::Pressed))
 		{
-			test_obj->Translate(glm::vec3(0, 0, -moveSpeed) * delta_time);
+			test_model->Translate(glm::vec3(0, 0, -moveSpeed) * delta_time);
 		}
 
 		if (InputManager::Instance().GetKey(KeyCode::A, KeyAction::Pressed))
 		{
-			test_obj->Rotate(glm::vec3(0, delta_time * 45, 0));
+			test_model->Rotate(glm::vec3(0, delta_time * 45, 0));
 		}
 
 		if (InputManager::Instance().GetKey(KeyCode::D, KeyAction::Pressed))
 		{
-			test_obj->Rotate(glm::vec3(0, -delta_time * 45, 0));
+			test_model->Rotate(glm::vec3(0, -delta_time * 45, 0));
 		}
 		//game_cam->HandleInput(delta_time);
-		game_cam->SetPosition(test_obj->GetPosition() - glm::vec3(0, -7, 10));
+		game_cam->SetPosition(test_model->GetPosition() - glm::vec3(0, -7, 10));
 
 		pl->SetPosition(game_cam->Position());
 		//std::cout << "rotation: X: " << game_cam->Rotation().x << ", y: " << game_cam->Rotation().y << ", Z: " << game_cam->Rotation().z << "\n";
@@ -74,8 +74,8 @@ namespace Photon
 	void RenderScene::Render()
 	{
 		game_cam->Update();
-		test_obj->Draw();
-		pl->ApplyLighting(test_obj);
+		/*test_obj->Draw();
+		pl->ApplyLighting(test_obj);*/
 		//light_cube->Draw();
 
 		plane->Draw();
@@ -118,7 +118,7 @@ namespace Photon
 	{
 		//m_point = new Photon::Point(glm::vec2(600, 400));
 		//input_manager = new InputManager(GetRenderer()->GetWindow());
-		test_obj = new Photon::Cube(1, 1, 1, glm::vec3(800.0f, 400.0f, 0.0f));
+		//test_obj = new Photon::Cube(1, 1, 1, glm::vec3(800.0f, 400.0f, 0.0f));
 		//TODO: change this to handle reletive path
 		//test_obj->LoadTexture("D:\\_PhotonRenderer\\Photon3DRenderer\\x64\\Release\\resources\\brick.png");
 		//cam = new FPSCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 0.0f, 2.0f));
