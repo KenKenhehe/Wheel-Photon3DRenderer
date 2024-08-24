@@ -81,8 +81,8 @@ namespace Photon
 		plane->Draw();
 		pl->ApplyLighting(plane);
 
-		/*test_model->Draw();
-		pl->ApplyLighting(test_model);*/
+		test_model->Draw();
+		pl->ApplyLighting(test_model);
 
 		pl->show();
 		
@@ -133,7 +133,7 @@ namespace Photon
 		pl = new Photon::PointLight(glm::vec3(600.0f, 500.0f, 0.0f), glm::vec4(1, 1, 1, 1), false);
 		game_cam = new TankGameCamera(GetWidth(), GetHeight(), glm::vec3(0.0f, 200.0f, 300.0f));
 		game_cam->SetRotation(glm::vec3(0.f, -0.6f, 1));
-		//test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(0.f,300.0f, 0.0f));
+		test_model = new Photon::Model("D:\\_photonRenderer\\test_model\\backpack\\backpack.obj", glm::vec3(0.f,300.0f, 0.0f));
 	}
 
 	void RenderScene::Dispose()
